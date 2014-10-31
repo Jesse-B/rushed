@@ -1,2 +1,59 @@
 Rushed! design document voor het Rush Hour project
 
+Representaties:
+
+Veld:
+Het speelveld waarin de auto's staan. Is altijd een vierkant (?) van x bij x vakjes. De
+uitgang is altijd aan de rechterzijde in het midden.
+
+class Field
+    def __init__(self, length)
+        self.length = length
+        self.exit = (x, y)
+        self.vehicles = []
+
+    def isPositionInField(self, position)
+        Kijken of een positie wel in het veld zit. Een check wanneer een auto
+        verplaatst wordt.
+        returns True or False
+
+    def isTileEmpty(self, x, y)
+        Kijken of een tegel vrij is om te bepalen of een auto mag bewegen.
+        returns True or False
+
+
+Voertuig:
+Een voertuig is een auto (2 bij 1) of een vrachtwagen (3 bij 1). Twee aparte classes?
+Het voertuig kan alleen in de richting van zijn lengte bewegen en als het hokje ernaast
+leeg is.
+
+class Vehicle
+    def __init__(self, room, positions, color)
+        self.room = room
+        self.positions = positions
+        self.color = color
+
+    def moveTo(self, positions)
+        Auto verplaatsen naar nieuwe posities.
+        if every position self.room.isPositionInField and isTileEmpty:
+            move to new positions
+
+
+Positie:
+Een positie heeft een x en y waarde en bevindt zich binnen de afmetingen van het Veld.
+
+class Position
+    def __init__(self, x, y)
+        self.x = x
+        self.y = y
+
+
+Nog te bespreken:
+De rode auto is natuurlijk een speciaal geval. Moet er bij elke stap gekeken worden
+of de rode auto in de richting van de uitgang kan bewegen?
+
+De orientatie (richting) van een voertuig vaststellen? Horizontaal of verticaal. Helpt dit bij
+het bewegen van een auto?
+
+Is het nuttig om de Vehicle class onder te verdelen in een Auto en een Vrachtwagen? En een speciale
+RodeAuto class?
