@@ -1,92 +1,57 @@
-class Field(object):
-    def __init__(self, length):
-        self.tiles = [[0 for x in range(length)] for x in range(length)]
-
-    def modifyTiles(self, dest, source=None):
-        if source:
-            for pos in source:
-                self.tiles[pos[1] - 1][pos[0] - 1] = 0
-        for pos in dest:
-            self.tiles[pos[1] - 1][pos[0] - 1] = 1
-
-    def areTilesEmpty(self, positions):
-        for pos in positions:
-            if self.tiles[pos[1] - 1][pos[0] - 1] == 1:
-                raise Exception
-        return True
-
-    def arePositionsValid(self, positions, vehicleOrientation):
-        for pos in positions:
-            # check if position in field
-            try:
-                self.tiles[pos[1] - 1][pos[0] - 1]
-            except IndexError:
-                raise Exception
-
-            # check if tile is empty
-            if not self.areTilesEmpty(positions):
-                raise Exception
-
-        # check if positions on one line and same orientation
-        if vehicleOrientation == "horizontal":
-            yPositions = [pos[1] for pos in positions]
-            if not len(set(yPositions)) == 1:
-                raise Exception
-        elif vehicleOrientation == "vertical":
-            xPositions = [pos[0] for pos in positions]
-            if not len(set(xPositions)) == 1:
-                raise Exception
-        return True
-
-    def __str__(self):
-        rows = ""
-        for row in self.tiles:
-            rows = rows + str(row) + '\n'
-        return rows
+from field import Field, Vehicle
 
 
-class Vehicle(object):
-    def __init__(self, field, positions, orientation, color):
-        self.field = field
-        self.positions = positions
-        self.length = len(positions)
-        self.orientation = orientation
-        self.color = color
+def field1():
+    field = Field(6)
+    v1 = Vehicle(field, [(1, 5), (1, 6)], "vertical", "orange")
+    v2 = Vehicle(field, [(2, 5), (3, 5)], "horizontal", "blue")
+    v3 = Vehicle(field, [(3, 3), (3, 2), (3, 1)], "vertical", "purple")
+    v4 = Vehicle(field, [(4, 6), (4, 5), (4, 4)], "vertical", "orange")
+    v5 = Vehicle(field, [(5, 6), (6, 6)], "horizontal", "green")
+    v6 = Vehicle(field, [(5, 4), (6, 4)], "horizontal", "orange")
+    v7 = Vehicle(field, [(4, 1), (5, 1)], "horizontal", "blue")
+    v8 = Vehicle(field, [(6, 3), (6, 2), (6, 1)], "vertical", "Yellow")
 
-        if self.field.arePositionsValid(self.positions, self.orientation):
-            self.field.modifyTiles(self.positions)
+    red = Vehicle(field, [(4, 3), (5, 3)], "horizontal", "red")
+    return field
 
-    def moveTo(self, positions):
-        if self.orientation == "horizontal":
-            steps = positions[0][0] - self.positions[0][0]
-        else:
-            steps = positions[0][1] - self.positions[0][1]
+def field2():
+    field = Field(6)
+    v1 = Vehicle(field, [(1, 6), (1, 5)], "vertical", "orange")
+    v2 = Vehicle(field, [(1, 4), (2, 4)], "horizontal", "green")
+    v3 = Vehicle(field, [(3, 4), (4, 4)], "horizontal", "blue")
+    v4 = Vehicle(field, [(4, 6), (4, 5)], "vertical", "light-blue")
+    v5 = Vehicle(field, [(5, 6), (6, 6)], "horizontal", "orange")
+    v6 = Vehicle(field, [(5, 5), (6, 5)], "horizontal", "green")
+    v7 = Vehicle(field, [(5, 4), (5, 3)], "vertical", "light-blue")
+    v8 = Vehicle(field, [(2, 2), (3, 2)], "horizontal", "orange")
+    v9 = Vehicle(field, [(4, 2), (5, 2)], "horizontal", "green")
+    v10 = Vehicle(field, [(6, 4), (6, 3), (6, 2)], "vertical", "yellow")
+    v11 = Vehicle(field, [(3, 1), (4, 1)], "horizontal", "blue")
+    v12 = Vehicle(field, [(5, 1), (6, 1)], "horizontal", "orange")
 
-        if self.isMoveValid(positions, steps):
-            self.field.modifyTiles(positions, self.positions)
-            self.setPositions(positions)
+    red = Vehicle(field, [(3, 3), (4, 3)], "horizontal", "red")
+    return field
 
-    def isMoveValid(self, positions, steps):
-        if not self.field.arePositionsValid(positions, self.orientation):
-            # check if tiles in between are also empty
-            raise Exception
-        return True
+def field3():
+    field = Field(6)
+    v1 = Vehicle(field, [(2, 1), (3, 1)], "horizontal", "blue")
+    v2 = Vehicle(field, [(4, 1), (5, 1), (6, 1)], "horizontal", "yellow")
+    v3 = Vehicle(field, [(2, 2), (3, 2)], "horizontal", "orange")
+    v4 = Vehicle(field, [(4, 2), (4, 3)], "vertical", "blue")
+    v5 = Vehicle(field, [(5, 2), (6, 2)], "horizontal", "green")
+    v6 = Vehicle(field, [(3, 3), (3, 4)], "vertical", "light-blue")
+    v7 = Vehicle(field, [(1, 4), (2, 4)], "horizontal", "green")
+    v8 = Vehicle(field, [(4, 4), (5, 4)], "horizontal", "blue")
+    v9 = Vehicle(field, [(6, 3), (6, 4)], "vertical", "light-blue")
+    v10 = Vehicle(field, [(1, 5), (1, 6)], "vertical", "orange")
+    v11 = Vehicle(field, [(3, 5), (3, 6)], "vertical", "green")
+    v12 = Vehicle(field, [(5, 5), (6, 5)], "horizontal", "green")
 
-    def setPositions(self, positions):
-        self.positions = positions
-
+    red = Vehicle(field, [(1, 3), (2, 3)], "horizontal", "red")
+    return field
 
 if __name__ == "__main__":
-    field = Field(6)
-    print field
-    v1 = Vehicle(field, [(1, 1), (1, 2), (1, 3)], "vertical", "blue")
-    v2 = Vehicle(field, [(4, 3), (5, 3), (6, 3)], "horizontal", "yellow")
-    v3 = Vehicle(field, [(2, 6), (3, 6)], "horizontal", "green")
-    print field
-    v3.moveTo([(5,6), (6,6)])
-    print field
-    try:
-        v2.moveTo([(4, 4), (5, 4), (6, 4)])
-        print "Should raise exception, but didn't."
-    except Exception:
-        print "Succesfully raised exception."
+    print field1()
+    print field2()
+    print field3()
