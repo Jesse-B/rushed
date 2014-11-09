@@ -2,40 +2,18 @@ class Field(object):
     def __init__(self, length):
         self.tiles = [[0 for x in range(length)] for x in range(length)]
 
-    def modifyTiles(self, dest, source=None):
-        if source:
-            for pos in source:
-                self.tiles[pos[1] - 1][pos[0] - 1] = 0
-        for pos in dest:
+    def modifyTile(self, pos, status):
+        if status == "occupy":
             self.tiles[pos[1] - 1][pos[0] - 1] = 1
+        elif status == "leave":
+            self.tiles[pos[1] - 1][pos[0] - 1] = 0
 
-    def areTilesEmpty(self, positions):
-        for pos in positions:
+    def isTileEmpty(self, pos):
+        try:
             if self.tiles[pos[1] - 1][pos[0] - 1] == 1:
-                raise Exception
-        return True
-
-    def arePositionsValid(self, positions, vehicleOrientation):
-        for pos in positions:
-            # check if position in field
-            try:
-                self.tiles[pos[1] - 1][pos[0] - 1]
-            except IndexError:
-                raise Exception
-
-            # check if tile is empty
-            if not self.areTilesEmpty(positions):
-                raise Exception
-
-        # check if positions on one line and same orientation
-        if vehicleOrientation == "horizontal":
-            yPositions = [pos[1] for pos in positions]
-            if not len(set(yPositions)) == 1:
-                raise Exception
-        elif vehicleOrientation == "vertical":
-            xPositions = [pos[0] for pos in positions]
-            if not len(set(xPositions)) == 1:
-                raise Exception
+                return False
+        except IndexError:
+            return False
         return True
 
     def __str__(self):
@@ -44,49 +22,65 @@ class Field(object):
             rows = rows + str(row) + '\n'
         return rows
 
+    def __eq__(self, other):
+       return self.tiles == other.tiles
+
 
 class Vehicle(object):
     def __init__(self, field, positions, orientation, color):
         self.field = field
         self.positions = positions
-        self.length = len(positions)
         self.orientation = orientation
         self.color = color
 
-        if self.field.arePositionsValid(self.positions, self.orientation):
-            self.field.modifyTiles(self.positions)
+        for pos in self.positions:
+            self.field.modifyTile(pos, "occupy")
 
-    def moveTo(self, positions):
+    def getPossibleMoves(self):
+        possibleMoves = []
         if self.orientation == "horizontal":
-            steps = positions[0][0] - self.positions[0][0]
-        else:
-            steps = positions[0][1] - self.positions[0][1]
+            leftTile = (self.positions[0][0] - 1, self.positions[0][1])
+            if self.field.isTileEmpty(leftTile):
+                tileToLeave = self.positions[-1]
+                possibleMoves.append((tileToLeave, leftTile, "left"))
+            rightTile = (self.positions[-1][0] + 1, self.positions[-1][1])
+            if self.field.isTileEmpty(rightTile):
+                tileToLeave = self.positions[0]
+                possibleMoves.append((tileToLeave, rightTile, "right"))
 
-        if self.isMoveValid(positions, steps):
-            self.field.modifyTiles(positions, self.positions)
-            self.setPositions(positions)
+        if self.orientation == "vertical":
+            upTile = (self.positions[0][0], self.positions[0][1] - 1)
+            if self.field.isTileEmpty(upTile):
+                tileToLeave = self.positions[-1]
+                possibleMoves.append((tileToLeave, upTile, "up"))
+            downTile = (self.positions[-1][0], self.positions[-1][1] + 1)
+            if self.field.isTileEmpty(downTile):
+                tileToLeave = self.positions[0]
+                possibleMoves.append((tileToLeave, downTile, "down"))
 
-    def isMoveValid(self, positions, steps):
-        if not self.field.arePositionsValid(positions, self.orientation):
-            # check if tiles in between are also empty
-            raise Exception
-        return True
+        return possibleMoves
 
-    def setPositions(self, positions):
-        self.positions = positions
+    def move(self, tileToLeave, tileToOccupy, direction):
+        self.field.modifyTile(tileToLeave, "leave")
+        self.field.modifyTile(tileToOccupy, "occupy")
+
+        self.positions.remove(tileToLeave)
+        if direction == "left" or direction == "up":
+            self.positions.insert(0, tileToOccupy)
+        elif direction == "right" or direction == "down":
+            self.positions.append(tileToOccupy)
 
 
 if __name__ == "__main__":
     field = Field(6)
+    field2 = Field(6)
+    print field == field2
     print field
     v1 = Vehicle(field, [(1, 1), (1, 2), (1, 3)], "vertical", "blue")
     v2 = Vehicle(field, [(4, 3), (5, 3), (6, 3)], "horizontal", "yellow")
     v3 = Vehicle(field, [(2, 6), (3, 6)], "horizontal", "green")
     print field
-    v3.moveTo([(5,6), (6,6)])
+    v2Moves = v2.getPossibleMoves()
+    for move in v2Moves:
+        v2.move(move[0], move[1], move[2])
     print field
-    try:
-        v2.moveTo([(4, 4), (5, 4), (6, 4)])
-        print "Should raise exception, but didn't."
-    except Exception:
-        print "Succesfully raised exception."
