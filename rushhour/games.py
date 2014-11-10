@@ -10,7 +10,7 @@ def field1():
     # v6 = Vehicle([(5, 4), (6, 4)], "horizontal", "orange")
     # v7 = Vehicle([(4, 1), (5, 1)], "horizontal", "blue")
     # v8 = Vehicle([(6, 1), (6, 2), (6, 3)], "vertical", "yellow")
-            # red = Vehicle([(4, 3), (5, 3)], "horizontal", "red")
+    # red = Vehicle([(4, 3), (5, 3)], "horizontal", "red")
     v1 = Vehicle([(1, 2), (1, 1)], "vertical", "orange")
     v2 = Vehicle([(2, 2), (3, 2)], "horizontal", "blue")
     v3 = Vehicle([(3, 6), (3, 5), (3, 4)], "vertical", "purple")
