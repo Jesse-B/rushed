@@ -3,8 +3,8 @@ Rushed! design document voor het Rush Hour project
 Representaties:
 
 Veld:
-Het speelveld waarin de auto's staan. Is altijd een vierkant (?) van x bij x vakjes. De
-uitgang is altijd aan de rechterzijde in het midden.
+Het speelveld waarin de auto's staan. Is altijd een vierkant van x bij x vakjes. De
+uitgang is altijd aan de rechterzijde in het midden. 
 
 class Field
     def __init__(self, length)
@@ -23,7 +23,7 @@ class Field
 
 
 Voertuig:
-Een voertuig is een auto (2 bij 1) of een vrachtwagen (3 bij 1). Twee aparte classes?
+Een voertuig is een auto (2 bij 1) of een vrachtwagen (3 bij 1). 
 Het voertuig kan alleen in de richting van zijn lengte bewegen en als het hokje ernaast
 leeg is.
 
@@ -65,4 +65,23 @@ RodeAuto class?
 
 ## update 10-11
 Breadth First Search
-Wij zullen gebruik gaan maken van de Breadth First Search, omdat op deze manier de kortste weg met het minste aantal stappen gevonden zal worden. Door het gebruik van een queue zullen de nieuwe mogelijkheden opgeslagen worden en de mogelijkheden die al gebruikt zijn zullen op geslagen worden in een set. Vervolgens zal er elke keer gekeken worden of de mogelijkheid al in de set zit en als dit niet zo is zal deze toegevoegd worden. De velden mogen niet vaker voorkomen en op deze manier zal dat verholpen worden. 
+Wij zullen gebruik gaan maken van de Breadth First Search, omdat op deze manier de kortste 
+weg met het minste aantal stappen gevonden zal worden. Door het gebruik van een queue 
+zullen de nieuwe mogelijkheden opgeslagen worden en de mogelijkheden die al gebruikt zijn 
+zullen op geslagen worden in een set. Vervolgens zal er elke keer gekeken worden of 
+de mogelijkheid al in de set zit en als dit niet zo is zal deze toegevoegd worden. 
+De velden mogen niet vaker voorkomen en op deze manier zal dat verholpen worden. 
+
+def field1():
+	dit is level 1 van het voorbeeld die opgelost moet worden. Alle auto’s zijn hier in 	het veld gezet
+
+def field2():
+	dit is level 2 van het voorbeeld die opgelost moet worden. Alle auto’s zijn hier in 	het veld gezet
+
+def field3():
+	dit is level 3 van het voorbeeld die opgelost moet worden. Alle auto’s zijn hier in 	het veld gezet
+
+
+def BFSearch(fieldsQueue, visited):
+	zoekt alle mogelijkheden per stap en slaat deze op in een queue. Als de mogelijkheid
+	gebruikt is dan wordt deze in de set visited gezet.
