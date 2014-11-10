@@ -57,3 +57,12 @@ het bewegen van een auto?
 
 Is het nuttig om de Vehicle class onder te verdelen in een Auto en een Vrachtwagen? En een speciale
 RodeAuto class?
+
+
+
+
+
+
+## update 10-11
+Breadth First Search
+Wij zullen gebruik gaan maken van de Breadth First Search, omdat op deze manier de kortste weg met het minste aantal stappen gevonden zal worden. Door het gebruik van een queue zullen de nieuwe mogelijkheden opgeslagen worden en de mogelijkheden die al gebruikt zijn zullen op geslagen worden in een set. Vervolgens zal er elke keer gekeken worden of de mogelijkheid al in de set zit en als dit niet zo is zal deze toegevoegd worden. De velden mogen niet vaker voorkomen en op deze manier zal dat verholpen worden. 
