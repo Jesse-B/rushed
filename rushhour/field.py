@@ -1,6 +1,7 @@
 class Field(object):
     def __init__(self, length, vehicles):
         self.tiles = [[0 for x in range(length)] for x in range(length)]
+        self.exit = (length, int(round(length / 2.0)))
         self.vehicles = vehicles
 
         for vehicle in self.vehicles:
