@@ -1,10 +1,11 @@
 import math
 import time
 
+from field import *
 from Tkinter import *
 
 class RushVisualisation:
-    def __init__(self, width, height):
+    def __init__(self, width, height, vehicles):
         "Initializes a visualization with the specified parameters."
         # Number of seconds to pause after each frame
         self.max_dim = max(width, height)
@@ -40,6 +41,8 @@ class RushVisualisation:
             x1, y1 = self._map_coords(0, i)
             x2, y2 = self._map_coords(width, i)
             self.w.create_line(x1, y1, x2, y2)
+        for vehicle in vehicles:
+            self.car(vehicle)
         self.master.update()
 
 
@@ -47,4 +50,14 @@ class RushVisualisation:
         "Maps grid positions to window positions (in pixels)."
         return (250 + 450 * ((x - self.width / 2.0) / self.max_dim),
                 250 + 450 * ((self.height / 2.0 - y) / self.max_dim))
+
+    def car(self, vehicle):
+        x1, y1 = vehicle.getBegin()
+        x2, y2 = vehicle.getEnd()
+        print x1 - 1, y1 - 1
+        print ''
+        print x2, y2
+        xa1, ya1 = self._map_coords(x1 - 1,y1 - 1)
+        xa2, ya2 = self._map_coords(x2, y2)
+        return self.w.create_rectangle(xa1, ya1, xa2, ya2, fill=vehicle.getColor())
 

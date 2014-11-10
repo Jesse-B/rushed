@@ -40,6 +40,15 @@ class Vehicle(object):
         self.orientation = orientation
         self.color = color
 
+    def getBegin(self):
+        return self.positions[0]
+
+    def getEnd(self):
+        return self.positions[len(self.positions)-1]
+
+    def getColor(self):
+        return self.color
+
     def insertVehicleInField(self, field):
         for pos in self.positions:
             field.modifyTile(pos, "occupy")
