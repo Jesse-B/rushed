@@ -59,10 +59,6 @@ Is het nuttig om de Vehicle class onder te verdelen in een Auto en een Vrachtwag
 RodeAuto class?
 
 
-
-
-
-
 ## update 10-11
 Breadth First Search
 Wij zullen gebruik gaan maken van de Breadth First Search, omdat op deze manier de kortste 
@@ -85,3 +81,6 @@ def field3():
 def BFSearch(fieldsQueue, visited):
 	zoekt alle mogelijkheden per stap en slaat deze op in een queue. Als de mogelijkheid
 	gebruikt is dan wordt deze in de set visited gezet.
+
+class RushVisualisation:
+	dit zal de visualisatie van de oplossing weergeven.
