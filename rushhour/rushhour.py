@@ -90,17 +90,4 @@ if __name__ == "__main__":
     # print field2()
 #     print field3()
 
-    v1 = Vehicle([(1, 5), (1, 6)], "vertical", "orange")
-    v2 = Vehicle([(2, 5), (3, 5)], "horizontal", "blue")
-    v3 = Vehicle([(3, 1), (3, 2), (3, 3)], "vertical", "purple")
-    v4 = Vehicle([(4, 4), (4, 5), (4, 6)], "vertical", "orange")
-    v5 = Vehicle([(5, 6), (6, 6)], "horizontal", "green")
-    v6 = Vehicle([(5, 4), (6, 4)], "horizontal", "orange")
-    v7 = Vehicle([(4, 1), (5, 1)], "horizontal", "blue")
-    v8 = Vehicle([(6, 1), (6, 2), (6, 3)], "vertical", "yellow")
-    red = Vehicle([(4, 3), (5, 3)], "horizontal", "red")
-    vehicles = [v1, v2, v3, v4, v5, v6, v7, v8, red]
-    anim = RushVisualisation(6, 6, vehicles)
-    print anim
-
     

@@ -98,6 +98,6 @@ def field3():
     return field
 
 if __name__ == "__main__":
-##    field1()
+    field1()
 ##    field2()
-    field3()
+##    field3()

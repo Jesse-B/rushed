@@ -8,7 +8,7 @@ class RushVisualisation:
     def __init__(self, width, height, vehicles):
         "Initializes a visualization with the specified parameters."
         # Number of seconds to pause after each frame
-        self.max_dim = max(width, height)
+        self.max_dim = max(width + 0.5, height)
         self.width = width
         self.height = height
 
@@ -43,6 +43,9 @@ class RushVisualisation:
             self.w.create_line(x1, y1, x2, y2)
         for vehicle in vehicles:
             self.car(vehicle)
+        endx1, endy1 = self._map_coords(6, 3)
+        endx2, endy2 = self._map_coords(6.3, 4)
+        self.w.create_rectangle(endx1, endy1, endx2, endy2, fill = "gray")
         self.master.update()
 
 
@@ -57,7 +60,7 @@ class RushVisualisation:
         print x1 - 1, y1 - 1
         print ''
         print x2, y2
-        xa1, ya1 = self._map_coords(x1 - 1,y1 - 1)
-        xa2, ya2 = self._map_coords(x2, y2)
+        xa1, ya1 = self._map_coords(x1 - 1,y1)
+        xa2, ya2 = self._map_coords(x2, y2 - 1)
         return self.w.create_rectangle(xa1, ya1, xa2, ya2, fill=vehicle.getColor())
 
