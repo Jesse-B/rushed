@@ -1,4 +1,5 @@
 from field import Field, Vehicle
+from rushvisual import *
 
 
 def field1():
@@ -52,7 +53,7 @@ def field3():
     return field
 
 if __name__ == "__main__":
-    print field1()
-    print field2()
-    print field3()
-# hoi
+##    print field1()
+    anim = RushVisualisation(6, 6)
+##    print field2()
+##    print field3()
