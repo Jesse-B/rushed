@@ -47,3 +47,4 @@ class RushVisualisation:
         "Maps grid positions to window positions (in pixels)."
         return (250 + 450 * ((x - self.width / 2.0) / self.max_dim),
                 250 + 450 * ((self.height / 2.0 - y) / self.max_dim))
+

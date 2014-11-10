@@ -14,24 +14,26 @@ def field1():
     v8 = Vehicle(field, [(6, 3), (6, 2), (6, 1)], "vertical", "Yellow")
 
     red = Vehicle(field, [(4, 3), (5, 3)], "horizontal", "red")
+
+##    vehicles = 
     return field
 
 def field2():
-    field = Field(6)
-    v1 = Vehicle(field, [(1, 6), (1, 5)], "vertical", "orange")
-    v2 = Vehicle(field, [(1, 4), (2, 4)], "horizontal", "green")
-    v3 = Vehicle(field, [(3, 4), (4, 4)], "horizontal", "blue")
-    v4 = Vehicle(field, [(4, 6), (4, 5)], "vertical", "light-blue")
-    v5 = Vehicle(field, [(5, 6), (6, 6)], "horizontal", "orange")
-    v6 = Vehicle(field, [(5, 5), (6, 5)], "horizontal", "green")
-    v7 = Vehicle(field, [(5, 4), (5, 3)], "vertical", "light-blue")
-    v8 = Vehicle(field, [(2, 2), (3, 2)], "horizontal", "orange")
-    v9 = Vehicle(field, [(4, 2), (5, 2)], "horizontal", "green")
-    v10 = Vehicle(field, [(6, 4), (6, 3), (6, 2)], "vertical", "yellow")
-    v11 = Vehicle(field, [(3, 1), (4, 1)], "horizontal", "blue")
-    v12 = Vehicle(field, [(5, 1), (6, 1)], "horizontal", "orange")
-
-    red = Vehicle(field, [(3, 3), (4, 3)], "horizontal", "red")
+    v1 = Vehicle([(1, 6), (1, 5)], "vertical", "orange")
+    v2 = Vehicle([(1, 4), (2, 4)], "horizontal", "green")
+    v3 = Vehicle([(3, 4), (4, 4)], "horizontal", "blue")
+    v4 = Vehicle([(4, 6), (4, 5)], "vertical", "light-blue")
+    v5 = Vehicle([(5, 6), (6, 6)], "horizontal", "orange")
+    v6 = Vehicle([(5, 5), (6, 5)], "horizontal", "green")
+    v7 = Vehicle([(5, 4), (5, 3)], "vertical", "light-blue")
+    v8 = Vehicle([(2, 2), (3, 2)], "horizontal", "orange")
+    v9 = Vehicle([(4, 2), (5, 2)], "horizontal", "green")
+    v10 = Vehicle([(6, 4), (6, 3), (6, 2)], "vertical", "yellow")
+    v11 = Vehicle([(3, 1), (4, 1)], "horizontal", "blue")
+    v12 = Vehicle([(5, 1), (6, 1)], "horizontal", "orange")
+    red = Vehicle([(3, 3), (4, 3)], "horizontal", "red")
+    vehicles = [v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, red]
+    field = Field(6, vehicles)
     return field
 
 def field3():
@@ -54,6 +56,6 @@ def field3():
 
 if __name__ == "__main__":
 ##    print field1()
-    anim = RushVisualisation(6, 6)
-##    print field2()
+##    anim = RushVisualisation(6, 6)
+    print field2()
 ##    print field3()
