@@ -1,5 +1,7 @@
 import copy
 import Queue
+
+from rushvisual import *
 from field import Field, Vehicle
 
 
@@ -84,5 +86,6 @@ if __name__ == "__main__":
     queue = Queue.Queue()
     queue.put(field)
     BFSearch(queue, set([field]))
+    anim = RushVisualisation(6, 6)
     # print field2()
 #     print field3()
