@@ -2,15 +2,24 @@ from field import Field, Vehicle
 from rushvisual import *
 
 def field1():
-    v1 = Vehicle([(1, 5), (1, 6)], "vertical", "orange")
-    v2 = Vehicle([(2, 5), (3, 5)], "horizontal", "blue")
-    v3 = Vehicle([(3, 1), (3, 2), (3, 3)], "vertical", "purple")
-    v4 = Vehicle([(4, 4), (4, 5), (4, 6)], "vertical", "orange")
-    v5 = Vehicle([(5, 6), (6, 6)], "horizontal", "green")
-    v6 = Vehicle([(5, 4), (6, 4)], "horizontal", "orange")
-    v7 = Vehicle([(4, 1), (5, 1)], "horizontal", "blue")
-    v8 = Vehicle([(6, 1), (6, 2), (6, 3)], "vertical", "yellow")
-    red = Vehicle([(4, 3), (5, 3)], "horizontal", "red")
+    # v1 = Vehicle([(1, 5), (1, 6)], "vertical", "orange")
+    # v2 = Vehicle([(2, 5), (3, 5)], "horizontal", "blue")
+    # v3 = Vehicle([(3, 1), (3, 2), (3, 3)], "vertical", "purple")
+    # v4 = Vehicle([(4, 4), (4, 5), (4, 6)], "vertical", "orange")
+    # v5 = Vehicle([(5, 6), (6, 6)], "horizontal", "green")
+    # v6 = Vehicle([(5, 4), (6, 4)], "horizontal", "orange")
+    # v7 = Vehicle([(4, 1), (5, 1)], "horizontal", "blue")
+    # v8 = Vehicle([(6, 1), (6, 2), (6, 3)], "vertical", "yellow")
+            # red = Vehicle([(4, 3), (5, 3)], "horizontal", "red")
+    v1 = Vehicle([(1, 2), (1, 1)], "vertical", "orange")
+    v2 = Vehicle([(2, 2), (3, 2)], "horizontal", "blue")
+    v3 = Vehicle([(3, 6), (3, 5), (3, 4)], "vertical", "purple")
+    v4 = Vehicle([(4, 3), (4, 2), (4, 1)], "vertical", "orange")
+    v5 = Vehicle([(5, 1), (6, 1)], "horizontal", "green")
+    v6 = Vehicle([(5, 3), (6, 3)], "horizontal", "orange")
+    v7 = Vehicle([(4, 6), (5, 6)], "horizontal", "blue")
+    v8 = Vehicle([(6, 6), (6, 5), (6, 4)], "vertical", "yellow")
+    red = Vehicle([(4, 4), (5, 4)], "horizontal", "red")
 
     vehicles = [v1, v2, v3, v4, v5, v6, v7, v8, red]
     field = Field(6, vehicles)
