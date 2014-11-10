@@ -28,7 +28,10 @@ class Field(object):
         return rows
 
     def __eq__(self, other):
-       return self.tiles == other.tiles
+        return self.tiles == other.tiles
+
+    def __hash__(self):
+        return hash(str(self.tiles))
 
 
 class Vehicle(object):
