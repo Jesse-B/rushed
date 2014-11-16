@@ -5,29 +5,29 @@ import Queue
 from field import Field, Vehicle
 
 
-def BFSearch(fieldsQueue, visited):
+def BFSearch(fieldsQueue, visited, vehicles):
     solution = None
     while solution is None:
         field = fieldsQueue.get()
-        for x in range(len(field.vehicles)):
-            vehicle = field.vehicles[x]
-            moves = vehicle.getPossibleMoves(field)
-            for move in moves:
-                copyField = copy.deepcopy(field)
-                copyVehicle = copyField.vehicles[x]
-                copyVehicle.move(copyField, move[0], move[1], move[2])
-                if not copyField in visited:
-                    visited.add(copyField)
-                    fieldsQueue.put(copyField)
-                if copyVehicle.color == "red":
-                    if copyVehicle.positions[-1] == copyField.exit:
-                        print "FOUND SOLUTION"
-                        print copyField
-                        solution = copyField
+        if field.tiles[field.exit] == "R":
+            print "FOUND SOLUTION"
+            print field
+            solution = field
+        movedVehicles = ""
+        for tile in field.tiles:
+            if tile != "0" and tile not in movedVehicles:
+                vehicle = vehicles[tile]
+                moves = vehicle.getPossibleMoves(field)
+                for move in moves:
+                    if not move.tiles in visited:
+                        visited.add(move.tiles)
+                        fieldsQueue.put(move)
+                movedVehicles += tile
     return solution
 
 if __name__ == "__main__":
-    field = games.field2()
+    field = games.field1()
+    vehicles = games.vehicles1()
     queue = Queue.Queue()
     queue.put(field)
-    BFSearch(queue, set([field]))
+    BFSearch(queue, set([field]), vehicles)

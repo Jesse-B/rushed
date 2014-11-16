@@ -2,21 +2,22 @@ from field import Field, Vehicle
 # from rushvisual import *
 
 def field1():
-    v1 = Vehicle([(1, 5), (1, 6)], "vertical", "orange")
-    v2 = Vehicle([(2, 5), (3, 5)], "horizontal", "blue")
-    v3 = Vehicle([(3, 1), (3, 2), (3, 3)], "vertical", "purple")
-    v4 = Vehicle([(4, 4), (4, 5), (4, 6)], "vertical", "orange")
-    v5 = Vehicle([(5, 6), (6, 6)], "horizontal", "green")
-    v6 = Vehicle([(5, 4), (6, 4)], "horizontal", "orange")
-    v7 = Vehicle([(4, 1), (5, 1)], "horizontal", "blue")
-    v8 = Vehicle([(6, 1), (6, 2), (6, 3)], "vertical", "yellow")
-    red = Vehicle([(4, 3), (5, 3)], "horizontal", "red")
-
-    vehicles = [v1, v2, v3, v4, v5, v6, v7, v8, red]
-    field = Field(6, vehicles)
-    # anim = RushVisualisation(6, 6, vehicles)
-    # print anim
+    tiles = "00CGGH00C00H00CRRH000DFFABBD00A00DEE"
+    field = Field(tiles, 6)
     return field
+
+def vehicles1():
+    return {
+        "A": Vehicle("A", "vertical", "orange"),
+        "B": Vehicle("B", "horizontal", "blue"),
+        "C": Vehicle("C", "vertical", "purple"),
+        "D": Vehicle("D", "vertical", "orange"),
+        "E": Vehicle("E", "horizontal", "green"),
+        "F": Vehicle("F", "horizontal", "orange"),
+        "G": Vehicle("G", "horizontal", "blue"),
+        "H": Vehicle("H", "vertical", "yellow"),
+        "R": Vehicle("R", "horizontal", "red"),
+    }
 
 def field2():
     v1 = Vehicle([(1, 5), (1, 6)], "vertical", "orange")

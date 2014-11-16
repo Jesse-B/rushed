@@ -1,91 +1,71 @@
 class Field(object):
-    def __init__(self, length, vehicles):
-        self.tiles = [[0 for x in range(length)] for x in range(length)]
-        self.exit = (length, int(round(length / 2.0)))
-        self.vehicles = vehicles
+    def __init__(self, tiles, length):
+        self.tiles = tiles
+        self.length = length
+        self.exit = (length * int(round(self.length / 2.0))) - 1
 
-        for vehicle in self.vehicles:
-            vehicle.insertVehicleInField(self)
-
-    def modifyTile(self, pos, status):
-        if status == "occupy":
-            self.tiles[pos[1] - 1][pos[0] - 1] = 1
-        elif status == "leave":
-            self.tiles[pos[1] - 1][pos[0] - 1] = 0
-
-    def isTileEmpty(self, pos):
-        try:
-            if self.tiles[pos[1] - 1][pos[0] - 1] == 1 or pos[0] < 1 or pos[1] < 1:
+    def isTileEmpty(self, pos, row=None):
+        if row is None:
+            if not 0 <= pos < len(self.tiles):
                 return False
-        except IndexError:
+        elif not row * self.length <= pos < (row + 1) * self.length:
+            return False
+        if self.tiles[pos] != "0":
             return False
         return True
 
     def __str__(self):
         rows = ""
-        for row in self.tiles:
-            rows = rows + str(row) + '\n'
+        tileNum = self.length
+        for row in range(len(self.tiles) / self.length):
+            rows = rows + self.tiles[tileNum - self.length : tileNum] + '\n'
+            tileNum += self.length
         return rows
 
     def __eq__(self, other):
         return self.tiles == other.tiles
 
-    def __hash__(self):
-        return hash(str(self.tiles))
-
 
 class Vehicle(object):
-    def __init__(self, positions, orientation, color):
-        self.positions = positions
+    def __init__(self, name, orientation, color):
+        self.name = name
         self.orientation = orientation
         self.color = color
-
-    def getBegin(self):
-        return self.positions[0]
-
-    def getEnd(self):
-        return self.positions[len(self.positions)-1]
 
     def getColor(self):
         return self.color
 
-    def insertVehicleInField(self, field):
-        for pos in self.positions:
-            field.modifyTile(pos, "occupy")
-
     def getPossibleMoves(self, field):
         possibleMoves = []
+        currentPositions = [i for i in range(len(field.tiles)) if field.tiles[i] == self.name]
         if self.orientation == "horizontal":
-            leftTile = (self.positions[0][0] - 1, self.positions[0][1])
-            if field.isTileEmpty(leftTile):
-                tileToLeave = self.positions[-1]
-                possibleMoves.append((tileToLeave, leftTile, "left"))
-            rightTile = (self.positions[-1][0] + 1, self.positions[-1][1])
-            if field.isTileEmpty(rightTile):
-                tileToLeave = self.positions[0]
-                possibleMoves.append((tileToLeave, rightTile, "right"))
+            row = currentPositions[0] / field.length
+            leftTile = currentPositions[0] - 1
+            if field.isTileEmpty(leftTile, row):
+                tileToLeave = currentPositions[-1]
+                newTiles = field.tiles[:leftTile] + self.name + field.tiles[leftTile + 1:tileToLeave] + "0" + field.tiles[tileToLeave + 1:]
+                possibleMoves.append(Field(newTiles, field.length))
+
+            rightTile = currentPositions[-1] + 1
+            if field.isTileEmpty(rightTile, row):
+                tileToLeave = currentPositions[0]
+                newTiles = field.tiles[:tileToLeave] + "0" + field.tiles[tileToLeave + 1:rightTile] + self.name + field.tiles[rightTile + 1:]
+                possibleMoves.append(Field(newTiles, field.length))
 
         if self.orientation == "vertical":
-            upTile = (self.positions[0][0], self.positions[0][1] - 1)
+            upTile = currentPositions[0] - field.length
             if field.isTileEmpty(upTile):
-                tileToLeave = self.positions[-1]
-                possibleMoves.append((tileToLeave, upTile, "up"))
-            downTile = (self.positions[-1][0], self.positions[-1][1] + 1)
+                tileToLeave = currentPositions[-1]
+                newTiles = field.tiles[:upTile] + self.name + field.tiles[upTile + 1:tileToLeave] + "0" + field.tiles[tileToLeave + 1:]
+                possibleMoves.append(Field(newTiles, field.length))
+
+            downTile = currentPositions[-1] + field.length
             if field.isTileEmpty(downTile):
-                tileToLeave = self.positions[0]
-                possibleMoves.append((tileToLeave, downTile, "down"))
+                tileToLeave = currentPositions[0]
+                newTiles = field.tiles[:tileToLeave] + "0" + field.tiles[tileToLeave + 1:downTile] + self.name + field.tiles[downTile + 1:]
+                possibleMoves.append(Field(newTiles, field.length))
 
         return possibleMoves
-
-    def move(self, field, tileToLeave, tileToOccupy, direction):
-        field.modifyTile(tileToLeave, "leave")
-        field.modifyTile(tileToOccupy, "occupy")
-
-        self.positions.remove(tileToLeave)
-        if direction == "left" or direction == "up":
-            self.positions.insert(0, tileToOccupy)
-        elif direction == "right" or direction == "down":
-            self.positions.append(tileToOccupy)
 
 
 if __name__ == "__main__":
