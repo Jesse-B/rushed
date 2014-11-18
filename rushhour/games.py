@@ -3,6 +3,12 @@ from field import Field, Vehicle
 
 def field1():
     tiles = "00CGGH00C00H00CRRH000DFFABBD00A00DEE"
+    # 00CGGH
+    # 00C00H
+    # 00CRRH
+    # 000DFF
+    # ABBD00
+    # A00DEE
     field = Field(tiles, 6)
     return field
 
@@ -62,6 +68,6 @@ def field3():
     return field
 
 if __name__ == "__main__":
-#    field1()
+    field1()
 #    field2()
-    field3()
+##    field3()

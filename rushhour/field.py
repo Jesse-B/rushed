@@ -32,6 +32,9 @@ class Vehicle(object):
         self.orientation = orientation
         self.color = color
 
+    def __hash__(self):
+        return hash(self.name)
+
     def getColor(self):
         return self.color
 
@@ -66,6 +69,43 @@ class Vehicle(object):
                 possibleMoves.append(Field(newTiles, field.length))
 
         return possibleMoves
+
+    def getCoor(self, field):
+        self.len_tiles = len(field.tiles)
+        rowx = {}
+        xcoor = []
+        coordinates = []
+        for i in range(field.length):
+            rowx[i+1] = field.tiles[(len(field.tiles)/field.length)*(i):(len(field.tiles)/field.length)*(i+1)]
+            if self.name in rowx[i+1]:
+                xcoor.append(i+1)
+
+        for row in rowx.values():
+            for i in range(field.length):
+                if row[i] == self.name:
+                    for coor in xcoor:
+                        if (i+1,coor) not in coordinates:
+                            coordinates.append((i+1,coor))
+
+        miniy = coordinates[0][1]
+        maxiy = coordinates[1][1]
+        minix = coordinates[0][0]
+        maxix = coordinates[1][0]
+        if len(coordinates) == 3:
+
+            for coor in coordinates:
+                if self.orientation == "vertical":
+                    if miniy > coor[1]:
+                        miniy = coor[1]
+                    if maxiy < coor[1]:
+                        maxiy = coor[1]
+                else:
+                    if minix > coor[0]:
+                        minix = coor[0]
+                    if maxix < coor[0]:
+                        maxix = coor[0]
+
+        return (minix,miniy),(maxix,maxiy)
 
 
 if __name__ == "__main__":

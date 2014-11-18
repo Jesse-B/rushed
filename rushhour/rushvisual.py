@@ -5,12 +5,13 @@ from field import *
 from Tkinter import *
 
 class RushVisualisation:
-    def __init__(self, width, height, vehicles):
-        "Initializes a visualization with the specified parameters."
-        # Number of seconds to pause after each frame
-        self.max_dim = max(width + 0.5, height)
+    def __init__(self, length, vehicles, field):
+        width = length
+        height = length
         self.width = width
         self.height = height
+        self.max_dim = max(width + 0.5, height)
+        self.field = field
 
         # Initialize a drawing surface
         self.master = Tk()
@@ -23,7 +24,7 @@ class RushVisualisation:
         x2, y2 = self._map_coords(width, height)
         self.w.create_rectangle(x1, y1, x2, y2, fill = "white")
 
-        # Draw gray squares for dirty tiles
+        # Draw gray squares for tiles
         self.tiles = {}
         for i in range(width):
             for j in range(height):
@@ -42,10 +43,12 @@ class RushVisualisation:
             x2, y2 = self._map_coords(width, i)
             self.w.create_line(x1, y1, x2, y2)
         for vehicle in vehicles:
-            self.car(vehicle)
-        endx1, endy1 = self._map_coords(6, 3)
-        endx2, endy2 = self._map_coords(6.3, 4)
+            self.car(vehicle, field, length)
+
+        endx1, endy1 = self._map_coords(6, 2)
+        endx2, endy2 = self._map_coords(6.3, 3)
         self.w.create_rectangle(endx1, endy1, endx2, endy2, fill = "gray")
+
         self.master.update()
 
 
@@ -54,13 +57,18 @@ class RushVisualisation:
         return (250 + 450 * ((x - self.width / 2.0) / self.max_dim),
                 250 + 450 * ((self.height / 2.0 - y) / self.max_dim))
 
-    def car(self, vehicle):
-        x1, y1 = vehicle.getBegin()
-        x2, y2 = vehicle.getEnd()
+    def car(self, vehicle, field, length):
+        x1, y1 = vehicle.getCoor(field)[0]
+        x2, y2 = vehicle.getCoor(field)[1]
+        # x1, y1, x2, y2 = vehicle.getCoor(field)
+        print x1, y1, x2, y2
         print x1 - 1, y1 - 1
         print ''
         print x2, y2
-        xa1, ya1 = self._map_coords(x1 - 1,y1)
-        xa2, ya2 = self._map_coords(x2, y2 - 1)
+        xa1, ya1 = self._map_coords(x1 - 1,y1 - 1)
+        xa2, ya2 = self._map_coords(x2, y2)
+        print xa1,ya1
+        print xa2,ya2
+        print 'hoi'
         return self.w.create_rectangle(xa1, ya1, xa2, ya2, fill=vehicle.getColor())
 

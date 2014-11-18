@@ -3,6 +3,7 @@ import games
 import Queue
 
 from field import Field, Vehicle
+from rushvisual import *
 
 
 def BFSearch(fieldsQueue, visited, vehicles):
@@ -28,6 +29,9 @@ def BFSearch(fieldsQueue, visited, vehicles):
 if __name__ == "__main__":
     field = games.field1()
     vehicles = games.vehicles1()
-    queue = Queue.Queue()
-    queue.put(field)
-    BFSearch(queue, set([field]), vehicles)
+    # for vehicle in vehicles.values():
+    #     vehicle.getCoor(field)
+    RushVisualisation(6, vehicles.values(), field)
+    # queue = Queue.Queue()
+    # queue.put(field)
+    # BFSearch(queue, set([field]), vehicles)
