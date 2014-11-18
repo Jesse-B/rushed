@@ -1,7 +1,7 @@
 import math
 import time
 
-from field import *
+from field import Field, Vehicle
 from Tkinter import *
 
 class RushVisualisation:
@@ -55,20 +55,13 @@ class RushVisualisation:
     def _map_coords(self, x, y):
         "Maps grid positions to window positions (in pixels)."
         return (250 + 450 * ((x - self.width / 2.0) / self.max_dim),
-                250 + 450 * ((self.height / 2.0 - y) / self.max_dim))
+                250 + 450 * ((y - self.height / 2.0) / self.max_dim))
 
     def car(self, vehicle, field, length):
         x1, y1 = vehicle.getCoor(field)[0]
         x2, y2 = vehicle.getCoor(field)[1]
         # x1, y1, x2, y2 = vehicle.getCoor(field)
-        print x1, y1, x2, y2
-        print x1 - 1, y1 - 1
-        print ''
-        print x2, y2
         xa1, ya1 = self._map_coords(x1 - 1,y1 - 1)
         xa2, ya2 = self._map_coords(x2, y2)
-        print xa1,ya1
-        print xa2,ya2
-        print 'hoi'
         return self.w.create_rectangle(xa1, ya1, xa2, ya2, fill=vehicle.getColor())
 

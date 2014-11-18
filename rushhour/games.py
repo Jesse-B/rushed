@@ -1,5 +1,4 @@
 from field import Field, Vehicle
-# from rushvisual import *
 
 def field1():
     tiles = "00CGGH00C00H00CRRH000DFFABBD00A00DEE"

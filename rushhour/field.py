@@ -14,6 +14,9 @@ class Field(object):
             return False
         return True
 
+    def getCars(self):
+        return self.tiles
+
     def __str__(self):
         rows = ""
         tileNum = self.length
@@ -31,9 +34,6 @@ class Vehicle(object):
         self.name = name
         self.orientation = orientation
         self.color = color
-
-    def __hash__(self):
-        return hash(self.name)
 
     def getColor(self):
         return self.color
