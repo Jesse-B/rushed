@@ -50,6 +50,7 @@ class RushVisualisation:
         self.w.create_rectangle(endx1, endy1, endx2, endy2, fill = "gray")
 
         self.master.update()
+        self.master.mainloop()
 
 
     def _map_coords(self, x, y):
