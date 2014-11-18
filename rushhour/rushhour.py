@@ -27,10 +27,10 @@ def BFSearch(fieldsQueue, visited, vehicles):
     return solution
 
 if __name__ == "__main__":
-    field = games.field1()
-    vehicles = games.vehicles1()
+    field = games.field3()
+    vehicles = games.vehicles3()
     # RushVisualisation(6, vehicles.values(), field)
     queue = Queue.Queue()
     queue.put(field)
     a = BFSearch(queue, set([field]), vehicles)
-    RushVisualisation(6, vehicles.values(), a)
+    #RushVisualisation(6, vehicles.values(), a)
