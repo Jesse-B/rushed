@@ -37,7 +37,7 @@ def field1():
     # 000DFF
     # ABBD00
     # A00DEE
-    field = Field(tiles, 6)
+    field = Field(tiles, 6, "BEFGR", "ACDH")
     return field
 
 def vehicles1():
@@ -61,7 +61,7 @@ def field2():
 #    BBCCGJ
 #    A00DFF
 #    A00DEE
-    field = Field(tiles, 6)
+    field = Field(tiles, 6, "BCEFHIKLR", "ADGJ")
     return field
     
 def vehicles2():
@@ -89,7 +89,7 @@ def field3():
 #    GGFHHI
 #    J0K0LL
 #    J0K000
-    field = Field(tiles, 6)
+    field = Field(tiles, 6, "ABCEGHLR", "DFIJK")
     return field
     
 def vehicles3():
@@ -164,7 +164,7 @@ def field5():
 #    DEHHJLLLM
 #    DEIIJ000M
     
-    field = Field(tiles, 9)
+    field = Field(tiles, 9, "AFHIKLOQTUXR", "BCDEGJMNPSVW")
     return field
 
 def vehicles5():
@@ -209,7 +209,7 @@ def field6():
 #    F0IISTT0W
 #    FHHHS0000
     
-    field = Field(tiles, 9)
+    field = Field(tiles, 9, "ABDEHIJOQTUVXYR", "CFGKLMNPSWZ")
     return field
     
 def vehicles6():

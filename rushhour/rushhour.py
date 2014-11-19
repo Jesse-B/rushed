@@ -40,5 +40,5 @@ if __name__ == "__main__":
     for state in a:
         # RushVisualisation(6, vehicles.values(), state)
         print Field(state, field.length, field.horizontalCars, field.verticalCars)
-    print len(a)
+    print "Steps:", len(a) - 1
     
