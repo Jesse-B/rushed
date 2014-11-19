@@ -6,24 +6,21 @@ from field import Field, Vehicle
 from rushvisual import RushVisualisation
 
 
-def BFSearch(start, fieldsQueue, visited, vehicles):
+def BFSearch(start, fieldsQueue, visited):
     parent = {}
     solution = None
     while solution is None:
         field = fieldsQueue.get()
         if field.tiles[field.exit] == "R":
-            solution = backtrace(parent, start, field)
-        movedVehicles = ""
-        for tile in field.tiles:
-            if tile != "0" and tile not in movedVehicles:
-                vehicle = vehicles[tile]
-                moves = vehicle.getPossibleMoves(field)
+            solution = backtrace(parent, start, field.tiles)
+        for x in range(field.length * field.length):
+            if field.tiles[x] == "0":
+                moves = field.getPossibleMovesForTile(x)
                 for move in moves:
-                    if not move.tiles in visited:
-                        parent[move] = field
-                        visited.add(move.tiles)
-                        fieldsQueue.put(move)
-                movedVehicles += tile
+                    if not move in visited:
+                        parent[move] = field.tiles
+                        visited.add(move)
+                        fieldsQueue.put(Field(move, field.length, field.horizontalCars, field.verticalCars))
     return solution
 
 def backtrace(parent, start, end):
@@ -34,13 +31,14 @@ def backtrace(parent, start, end):
     return path
 
 if __name__ == "__main__":
-    field = games.field2()
-    vehicles = games.vehicles2()
+    field = games.field4()
+    vehicles = games.vehicles4()
     # RushVisualisation(6, vehicles.values(), field)
     queue = Queue.Queue()
     queue.put(field)
-    a = BFSearch(field, queue, set([field]), vehicles)
+    a = BFSearch(field.tiles, queue, set([field]))
     for state in a:
-        RushVisualisation(6, vehicles.values(), state)
-        print state
+        # RushVisualisation(6, vehicles.values(), state)
+        print Field(state, field.length, field.horizontalCars, field.verticalCars)
+    print len(a)
     

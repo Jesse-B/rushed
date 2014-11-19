@@ -1,5 +1,34 @@
 from field import Field, Vehicle
 
+def grandmasterField():
+    tiles = "KKKADGJBBADGJ0RRDGCCL0000EL0II0EHHFF"
+    # KKKADG
+    # JBBADG
+    # J0RRDG
+    # CCL000
+    # 0EL0II
+    # 0EHHFF
+
+    field = Field(tiles, 6, "BCFHIKR", "ADEGJL")
+    return field
+
+def grandmasterVehicles():
+    return {
+        "A": Vehicle("A", "vertical", "orange"),
+        "B": Vehicle("B", "horizontal", "green"),
+        "C": Vehicle("C", "horizontal", "blue"),
+        "D": Vehicle("D", "vertical", "cyan"),
+        "E": Vehicle("E", "vertical", "orange"),
+        "F": Vehicle("F", "horizontal", "green"),
+        "G": Vehicle("G", "vertical", "cyan"),
+        "H": Vehicle("H", "horizontal", "orange"),
+        "I": Vehicle("I", "horizontal", "green"),
+        "J": Vehicle("J", "vertical", "yellow"),
+        "K": Vehicle("K", "horizontal", "blue"),
+        "L": Vehicle("L", "vertical", "orange"),
+        "R": Vehicle("R", "horizontal", "red")
+    }
+
 def field1():
     tiles = "00CGGH00C00H00CRRH000DFFABBD00A00DEE"
     # 00CGGH
@@ -93,7 +122,7 @@ def field4():
 #    I0GKM000P
 #    IJJJMNNOO
     
-    field = Field(tiles, 9)
+    field = Field(tiles, 9, "BDHJLNOQSVR", "ACEFGIKMPTU")
     return field
     
 def vehicles4():

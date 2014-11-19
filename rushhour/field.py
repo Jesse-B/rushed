@@ -1,18 +1,49 @@
 class Field(object):
-    def __init__(self, tiles, length):
+    def __init__(self, tiles, length, horizontalCars, verticalCars):
         self.tiles = tiles
         self.length = length
         self.exit = (length * int(round(self.length / 2.0))) - 1
+        self.horizontalCars = horizontalCars
+        self.verticalCars = verticalCars
 
-    def isTileEmpty(self, pos, row=None):
+    def getValidNeighbour(self, pos, row=None):
         if row is None:
             if not 0 <= pos < len(self.tiles):
-                return False
-        elif not row * self.length <= pos < (row + 1) * self.length:
-            return False
-        if self.tiles[pos] != "0":
-            return False
-        return True
+                return None
+            if not self.tiles[pos] in self.verticalCars:
+                return None
+        else:
+            if not row * self.length <= pos < (row + 1) * self.length:
+                return None
+            if not self.tiles[pos] in self.horizontalCars:
+                return None
+        return self.tiles[pos]
+
+    def getPossibleMovesForTile(self, tilePos):
+        row = tilePos / self.length
+        moves = []
+
+        left = self.getValidNeighbour(tilePos - 1, row)
+        if left:
+            leftPositions = [x for x in range(self.length * self.length) if self.tiles[x] == left]
+            newTiles = self.tiles[:leftPositions[0]] + "0" + self.tiles[leftPositions[0] + 1:tilePos] + left + self.tiles[tilePos + 1:]
+            moves.append(newTiles)
+        up = self.getValidNeighbour(tilePos - self.length)
+        if up:
+            upPositions = [x for x in range(self.length * self.length) if self.tiles[x] == up]
+            newTiles = self.tiles[:upPositions[0]] + "0" + self.tiles[upPositions[0] + 1:tilePos] + up + self.tiles[tilePos + 1:]
+            moves.append(newTiles)
+        right = self.getValidNeighbour(tilePos + 1, row)
+        if right:
+            rightPositions = [x for x in range(self.length * self.length) if self.tiles[x] == right]
+            newTiles = self.tiles[:tilePos] + right + self.tiles[tilePos + 1:rightPositions[-1]] + "0" + self.tiles[rightPositions[-1] + 1:]
+            moves.append(newTiles)
+        down = self.getValidNeighbour(tilePos + self.length)
+        if down:
+            downPositions = [x for x in range(self.length * self.length) if self.tiles[x] == down]
+            newTiles = self.tiles[:tilePos] + down + self.tiles[tilePos + 1:downPositions[-1]] + "0" + self.tiles[downPositions[-1] + 1:]
+            moves.append(newTiles)
+        return moves
 
     def getCars(self):
         return self.tiles
