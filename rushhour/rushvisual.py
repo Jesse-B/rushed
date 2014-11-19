@@ -50,6 +50,7 @@ class RushVisualisation:
         self.w.create_rectangle(endx1, endy1, endx2, endy2, fill = "gray")
 
         self.master.update()
+
         self.master.mainloop()
 
 
@@ -65,4 +66,6 @@ class RushVisualisation:
         xa1, ya1 = self._map_coords(x1 - 1,y1 - 1)
         xa2, ya2 = self._map_coords(x2, y2)
         return self.w.create_rectangle(xa1, ya1, xa2, ya2, fill=vehicle.getColor())
+
+    
 

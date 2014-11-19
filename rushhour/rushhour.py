@@ -41,5 +41,6 @@ if __name__ == "__main__":
     queue.put(field)
     a = BFSearch(field, queue, set([field]), vehicles)
     for state in a:
+        RushVisualisation(6, vehicles.values(), state)
         print state
-    #RushVisualisation(6, vehicles.values(), a)
+    
