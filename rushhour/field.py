@@ -1,3 +1,6 @@
+import Queue
+import games
+
 class Field(object):
     def __init__(self, tiles, length, horizontalCars, verticalCars):
         self.tiles = tiles
@@ -6,44 +9,64 @@ class Field(object):
         self.horizontalCars = horizontalCars
         self.verticalCars = verticalCars
 
-    def getValidNeighbour(self, pos, row=None):
-        if row is None:
-            if not 0 <= pos < len(self.tiles):
-                return None
-            if not self.tiles[pos] in self.verticalCars:
-                return None
-        else:
-            if not row * self.length <= pos < (row + 1) * self.length:
-                return None
-            if not self.tiles[pos] in self.horizontalCars:
-                return None
-        return self.tiles[pos]
-
     def getPossibleMovesForTile(self, tilePos):
         row = tilePos / self.length
         moves = []
 
-        left = self.getValidNeighbour(tilePos - 1, row)
-        if left:
-            leftPositions = [x for x in range(self.length * self.length) if self.tiles[x] == left]
-            newTiles = self.tiles[:leftPositions[0]] + "0" + self.tiles[leftPositions[0] + 1:tilePos] + left + self.tiles[tilePos + 1:]
-            moves.append(newTiles)
-        up = self.getValidNeighbour(tilePos - self.length)
-        if up:
-            upPositions = [x for x in range(self.length * self.length) if self.tiles[x] == up]
-            newTiles = self.tiles[:upPositions[0]] + "0" + self.tiles[upPositions[0] + 1:tilePos] + up + self.tiles[tilePos + 1:]
-            moves.append(newTiles)
-        right = self.getValidNeighbour(tilePos + 1, row)
-        if right:
-            rightPositions = [x for x in range(self.length * self.length) if self.tiles[x] == right]
-            newTiles = self.tiles[:tilePos] + right + self.tiles[tilePos + 1:rightPositions[-1]] + "0" + self.tiles[rightPositions[-1] + 1:]
-            moves.append(newTiles)
-        down = self.getValidNeighbour(tilePos + self.length)
-        if down:
-            downPositions = [x for x in range(self.length * self.length) if self.tiles[x] == down]
-            newTiles = self.tiles[:tilePos] + down + self.tiles[tilePos + 1:downPositions[-1]] + "0" + self.tiles[downPositions[-1] + 1:]
-            moves.append(newTiles)
+        leftPos = tilePos - 1
+        if  row * self.length <= leftPos < (row + 1) * self.length:
+            left = self.tiles[leftPos]
+            if left in self.horizontalCars:
+                leftPositions = [x for x in range(self.length * self.length) if self.tiles[x] == left]
+                newTiles = self.tiles[:leftPositions[0]] + "0" + self.tiles[leftPositions[0] + 1:tilePos] + left + self.tiles[tilePos + 1:]
+                moves.append(newTiles)
+        upPos = tilePos - self.length
+        if 0 <= upPos < len(self.tiles):
+            up = self.tiles[upPos]
+            if up in self.verticalCars:
+                upPositions = [x for x in range(self.length * self.length) if self.tiles[x] == up]
+                newTiles = self.tiles[:upPositions[0]] + "0" + self.tiles[upPositions[0] + 1:tilePos] + up + self.tiles[tilePos + 1:]
+                moves.append(newTiles)
+        rightPos = tilePos + 1
+        if row * self.length <= rightPos < (row + 1) * self.length:
+            right = self.tiles[rightPos]
+            if right in self.horizontalCars:
+                rightPositions = [x for x in range(self.length * self.length) if self.tiles[x] == right]
+                newTiles = self.tiles[:tilePos] + right + self.tiles[tilePos + 1:rightPositions[-1]] + "0" + self.tiles[rightPositions[-1] + 1:]
+                moves.append(newTiles)
+        downPos = tilePos + self.length
+        if 0 <= downPos < len(self.tiles):
+            down = self.tiles[downPos]
+            if down in self.verticalCars:
+                downPositions = [x for x in range(self.length * self.length) if self.tiles[x] == down]
+                newTiles = self.tiles[:tilePos] + down + self.tiles[tilePos + 1:downPositions[-1]] + "0" + self.tiles[downPositions[-1] + 1:]
+                moves.append(newTiles)
         return moves
+
+    def BFSearch(self, startField, stateQueue, visited):
+        parent = {}
+        solution = None
+        while solution is None:
+            state = stateQueue.get()
+            if state[self.exit] == "R":
+                solution = self.backtrace(parent, startField, state)
+            self.tiles = state
+            for x in range(self.length * self.length):
+                if self.tiles[x] == "0":
+                    moves = self.getPossibleMovesForTile(x)
+                    for move in moves:
+                        if not move in visited:
+                            parent[move] = state
+                            visited.add(move)
+                            stateQueue.put(move)
+        return solution
+
+    def backtrace(awlf, parent, start, end):
+        path = [end]
+        while path[-1] != start:
+            path.append(parent[path[-1]])
+        path.reverse()
+        return path
 
     def getCars(self):
         return self.tiles
@@ -108,15 +131,13 @@ class Vehicle(object):
 
 
 if __name__ == "__main__":
-    v1 = Vehicle([(1, 1), (1, 2), (1, 3)], "vertical", "blue")
-    v2 = Vehicle([(4, 3), (5, 3), (6, 3)], "horizontal", "yellow")
-    v3 = Vehicle([(2, 6), (3, 6)], "horizontal", "green")
-    v4 = Vehicle([(4, 5), (4, 6)], "vertical", "orange")
-    vehicles = [v1, v2, v3, v4]
-    field = Field(6, vehicles)
-    print field
-    for vehicle in field.vehicles:
-        moves = vehicle.getPossibleMoves(field)
-        for move in moves:
-            vehicle.move(field, move[0], move[1], move[2])
-    print field
+    field = games.field1()
+    startState = field.tiles
+    vehicles = games.vehicles1()
+    # RushVisualisation(6, vehicles.values(), field)
+    queue = Queue.Queue()
+    queue.put(startState)
+    import time
+    now = time.time()
+    a = field.BFSearch(startState, queue, set([startState]))
+    print time.time() - now
