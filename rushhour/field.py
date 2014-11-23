@@ -1,6 +1,3 @@
-import Queue
-import games
-
 class Field(object):
     def __init__(self, tiles, length, horizontalCars, verticalCars, vehicles):
         self.tiles = tiles
@@ -12,7 +9,7 @@ class Field(object):
 
     def getPossibleMovesForTile(self, tilePos):
         row = tilePos / self.length
-        moves = []
+        moves = set()
 
         leftPos = tilePos - 1
         if  row * self.length <= leftPos:
@@ -21,7 +18,7 @@ class Field(object):
                 carLength = self.vehicles[left]
                 firstPos = tilePos - carLength
                 newTiles = self.tiles[:firstPos] + "0" + self.tiles[firstPos + 1:tilePos] + left + self.tiles[tilePos + 1:]
-                moves.append(newTiles)
+                moves.add(newTiles)
         upPos = tilePos - self.length
         if 0 <= upPos:
             up = self.tiles[upPos]
@@ -29,7 +26,7 @@ class Field(object):
                 carLength = self.vehicles[up]
                 firstPos = tilePos - (carLength * self.length)
                 newTiles = self.tiles[:firstPos] + "0" + self.tiles[firstPos + 1:tilePos] + up + self.tiles[tilePos + 1:]
-                moves.append(newTiles)
+                moves.add(newTiles)
         rightPos = tilePos + 1
         if rightPos < (row + 1) * self.length:
             right = self.tiles[rightPos]
@@ -37,7 +34,7 @@ class Field(object):
                 carLength = self.vehicles[right]
                 lastPos = tilePos + carLength
                 newTiles = self.tiles[:tilePos] + right + self.tiles[tilePos + 1:lastPos] + "0" + self.tiles[lastPos + 1:]
-                moves.append(newTiles)
+                moves.add(newTiles)
         downPos = tilePos + self.length
         if downPos < len(self.tiles):
             down = self.tiles[downPos]
@@ -45,7 +42,7 @@ class Field(object):
                 carLength = self.vehicles[down]
                 lastPos = tilePos + (carLength * self.length)
                 newTiles = self.tiles[:tilePos] + down + self.tiles[tilePos + 1:lastPos] + "0" + self.tiles[lastPos + 1:]
-                moves.append(newTiles)
+                moves.add(newTiles)
         return moves
 
     def getCars(self):
@@ -109,16 +106,3 @@ class Vehicle(object):
                         maxix = coor[0]
 
         return (minix,miniy),(maxix,maxiy)
-
-
-if __name__ == "__main__":
-    field = games.field1()
-    startState = field.tiles
-    # vehicles = games.vehicles1()
-    # RushVisualisation(6, vehicles.values(), field)
-    queue = Queue.Queue()
-    queue.put(startState)
-    import time
-    now = time.time()
-    a = field.BFSearch(startState, queue, set([startState]))
-    print time.time() - now

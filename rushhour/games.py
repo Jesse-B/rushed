@@ -48,7 +48,7 @@ def field1():
         "H": 3,
         "R": 2
     }
-    field = Field(tiles, 6, "BEFGR", "ACDH", vehicles)
+    field = Field(tiles, 6, set(["B", "E", "F", "G", "R"]), set(["A", "C", "D", "H"]), vehicles)
     return field
 
 # def vehicles1():

@@ -9,12 +9,14 @@ from rushvisual import RushVisualisation
 def BFSearch(field, startState, stateQueue, visited):
     parent = {}
     solution = None
+    exit = field.exit
+    numTiles = field.length * field.length
     while solution is None:
         state = stateQueue.get()
-        if state[field.exit] == "R":
+        if state[exit] == "R":
             solution = backtrace(parent, startState, state)
         field.tiles = state
-        for x in range(field.length * field.length):
+        for x in xrange(numTiles):
             if field.tiles[x] == "0":
                 moves = field.getPossibleMovesForTile(x)
                 for move in moves:
