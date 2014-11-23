@@ -32,26 +32,37 @@ def grandmasterVehicles():
 def field1():
     tiles = "00CGGH00C00H00CRRH000DFFABBD00A00DEE"
     # 00CGGH
-    # 00C00H
-    # 00CRRH
-    # 000DFF
-    # ABBD00
-    # A00DEE
-    field = Field(tiles, 6, "BEFGR", "ACDH")
+#     00C00H
+#     00CRRH
+#     000DFF
+#     ABBD00
+#     A00DEE
+    vehicles = {
+        "A": 2,
+        "B": 2,
+        "C": 3,
+        "D": 3,
+        "E": 2,
+        "F": 2,
+        "G": 2,
+        "H": 3,
+        "R": 2
+    }
+    field = Field(tiles, 6, "BEFGR", "ACDH", vehicles)
     return field
 
-def vehicles1():
-    return {
-        "A": Vehicle("A", "vertical", "orange"),
-        "B": Vehicle("B", "horizontal", "blue"),
-        "C": Vehicle("C", "vertical", "purple"),
-        "D": Vehicle("D", "vertical", "orange"),
-        "E": Vehicle("E", "horizontal", "green"),
-        "F": Vehicle("F", "horizontal", "orange"),
-        "G": Vehicle("G", "horizontal", "blue"),
-        "H": Vehicle("H", "vertical", "yellow"),
-        "R": Vehicle("R", "horizontal", "red")
-    }
+# def vehicles1():
+#     return {
+#         "A": Vehicle("A", "vertical", 2, "orange"),
+#         "B": Vehicle("B", "horizontal", 2, "blue"),
+#         "C": Vehicle("C", "vertical", 3, "purple"),
+#         "D": Vehicle("D", "vertical", 3, "orange"),
+#         "E": Vehicle("E", "horizontal", 2, "green"),
+#         "F": Vehicle("F", "horizontal", 2, "orange"),
+#         "G": Vehicle("G", "horizontal", 2, "blue"),
+#         "H": Vehicle("H", "vertical", 3, "yellow"),
+#         "R": Vehicle("R", "horizontal", 2, "red")
+#     }
     
 def field2():
     tiles = "00KKLL0HHIIJ00RRGJBBCCGJA00DFFA00DEE"

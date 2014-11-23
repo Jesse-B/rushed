@@ -6,21 +6,22 @@ from field import Field, Vehicle
 from rushvisual import RushVisualisation
 
 
-def BFSearch(startField, stateQueue, visited):
+def BFSearch(field, startState, stateQueue, visited):
     parent = {}
     solution = None
     while solution is None:
         state = stateQueue.get()
-        if state.tiles[field.exit] == "R":
-            solution = backtrace(parent, startField, state.tiles)
-        for x in range(state.length * state.length):
-            if state.tiles[x] == "0":
-                moves = state.getPossibleMovesForTile(x)
+        if state[field.exit] == "R":
+            solution = backtrace(parent, startState, state)
+        field.tiles = state
+        for x in range(field.length * field.length):
+            if field.tiles[x] == "0":
+                moves = field.getPossibleMovesForTile(x)
                 for move in moves:
                     if not move in visited:
-                        parent[move] = state.tiles
+                        parent[move] = state
                         visited.add(move)
-                        stateQueue.put(Field(move, state.length, state.horizontalCars, state.verticalCars))
+                        stateQueue.put(move)
     return solution
 
 def backtrace(parent, start, end):
@@ -32,13 +33,13 @@ def backtrace(parent, start, end):
 
 if __name__ == "__main__":
     field = games.field1()
-    vehicles = games.vehicles1()
+    # vehicles = games.vehicles1()
     # RushVisualisation(6, vehicles.values(), field)
     queue = Queue.Queue()
-    queue.put(field)
+    queue.put(field.tiles)
     import time
     now = time.time()
-    a = BFSearch(field.tiles, queue, set([field]))
+    a = BFSearch(field, field.tiles, queue, set([field.tiles]))
     print time.time() - now
     # for state in a:
         # RushVisualisation(6, vehicles.values(), state)

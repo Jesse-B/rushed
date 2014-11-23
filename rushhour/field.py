@@ -2,71 +2,51 @@ import Queue
 import games
 
 class Field(object):
-    def __init__(self, tiles, length, horizontalCars, verticalCars):
+    def __init__(self, tiles, length, horizontalCars, verticalCars, vehicles):
         self.tiles = tiles
         self.length = length
         self.exit = (length * int(round(self.length / 2.0))) - 1
         self.horizontalCars = horizontalCars
         self.verticalCars = verticalCars
+        self.vehicles = vehicles
 
     def getPossibleMovesForTile(self, tilePos):
         row = tilePos / self.length
         moves = []
 
         leftPos = tilePos - 1
-        if  row * self.length <= leftPos < (row + 1) * self.length:
+        if  row * self.length <= leftPos:
             left = self.tiles[leftPos]
             if left in self.horizontalCars:
-                leftPositions = [x for x in range(self.length * self.length) if self.tiles[x] == left]
-                newTiles = self.tiles[:leftPositions[0]] + "0" + self.tiles[leftPositions[0] + 1:tilePos] + left + self.tiles[tilePos + 1:]
+                carLength = self.vehicles[left]
+                firstPos = tilePos - carLength
+                newTiles = self.tiles[:firstPos] + "0" + self.tiles[firstPos + 1:tilePos] + left + self.tiles[tilePos + 1:]
                 moves.append(newTiles)
         upPos = tilePos - self.length
-        if 0 <= upPos < len(self.tiles):
+        if 0 <= upPos:
             up = self.tiles[upPos]
             if up in self.verticalCars:
-                upPositions = [x for x in range(self.length * self.length) if self.tiles[x] == up]
-                newTiles = self.tiles[:upPositions[0]] + "0" + self.tiles[upPositions[0] + 1:tilePos] + up + self.tiles[tilePos + 1:]
+                carLength = self.vehicles[up]
+                firstPos = tilePos - (carLength * self.length)
+                newTiles = self.tiles[:firstPos] + "0" + self.tiles[firstPos + 1:tilePos] + up + self.tiles[tilePos + 1:]
                 moves.append(newTiles)
         rightPos = tilePos + 1
-        if row * self.length <= rightPos < (row + 1) * self.length:
+        if rightPos < (row + 1) * self.length:
             right = self.tiles[rightPos]
             if right in self.horizontalCars:
-                rightPositions = [x for x in range(self.length * self.length) if self.tiles[x] == right]
-                newTiles = self.tiles[:tilePos] + right + self.tiles[tilePos + 1:rightPositions[-1]] + "0" + self.tiles[rightPositions[-1] + 1:]
+                carLength = self.vehicles[right]
+                lastPos = tilePos + carLength
+                newTiles = self.tiles[:tilePos] + right + self.tiles[tilePos + 1:lastPos] + "0" + self.tiles[lastPos + 1:]
                 moves.append(newTiles)
         downPos = tilePos + self.length
-        if 0 <= downPos < len(self.tiles):
+        if downPos < len(self.tiles):
             down = self.tiles[downPos]
             if down in self.verticalCars:
-                downPositions = [x for x in range(self.length * self.length) if self.tiles[x] == down]
-                newTiles = self.tiles[:tilePos] + down + self.tiles[tilePos + 1:downPositions[-1]] + "0" + self.tiles[downPositions[-1] + 1:]
+                carLength = self.vehicles[down]
+                lastPos = tilePos + (carLength * self.length)
+                newTiles = self.tiles[:tilePos] + down + self.tiles[tilePos + 1:lastPos] + "0" + self.tiles[lastPos + 1:]
                 moves.append(newTiles)
         return moves
-
-    def BFSearch(self, startField, stateQueue, visited):
-        parent = {}
-        solution = None
-        while solution is None:
-            state = stateQueue.get()
-            if state[self.exit] == "R":
-                solution = self.backtrace(parent, startField, state)
-            self.tiles = state
-            for x in range(self.length * self.length):
-                if self.tiles[x] == "0":
-                    moves = self.getPossibleMovesForTile(x)
-                    for move in moves:
-                        if not move in visited:
-                            parent[move] = state
-                            visited.add(move)
-                            stateQueue.put(move)
-        return solution
-
-    def backtrace(awlf, parent, start, end):
-        path = [end]
-        while path[-1] != start:
-            path.append(parent[path[-1]])
-        path.reverse()
-        return path
 
     def getCars(self):
         return self.tiles
@@ -84,9 +64,10 @@ class Field(object):
 
 
 class Vehicle(object):
-    def __init__(self, name, orientation, color):
+    def __init__(self, name, orientation, length, color):
         self.name = name
         self.orientation = orientation
+        self.length = length
         self.color = color
 
     def getColor(self):
@@ -133,7 +114,7 @@ class Vehicle(object):
 if __name__ == "__main__":
     field = games.field1()
     startState = field.tiles
-    vehicles = games.vehicles1()
+    # vehicles = games.vehicles1()
     # RushVisualisation(6, vehicles.values(), field)
     queue = Queue.Queue()
     queue.put(startState)
