@@ -1,11 +1,26 @@
 class Field(object):
     def __init__(self, tiles, length, horizontalCars, verticalCars, vehicles):
         self.tiles = tiles
+        self.row1 = tiles[0]
+        self.row2 = tiles[1]
+        self.row3 = tiles[2]
+        self.row4 = tiles[3]
+        self.row5 = tiles[4]
+        self.row6 = tiles[5]
         self.length = length
         self.exit = (length * int(round(self.length / 2.0))) - 1
         self.horizontalCars = horizontalCars
         self.verticalCars = verticalCars
         self.vehicles = vehicles
+
+    def updateTiles(self, tiles):
+        self.tiles = tiles
+        self.row1 = tiles[0]
+        self.row2 = tiles[1]
+        self.row3 = tiles[2]
+        self.row4 = tiles[3]
+        self.row5 = tiles[4]
+        self.row6 = tiles[5]
 
     def getPossibleMovesForTile(self, tilePos):
         row = tilePos / self.length
