@@ -16,7 +16,7 @@ def BFSearch(field, startState, stateQueue, visited):
         state = stateQueue.get()
         if state[exit] == "R":
             solution = backtrace(parent, startState, state)
-        field.updateTiles(state)
+        field.setTiles(state)
         for x in xrange(numTiles):
             if field.tiles[x] == "0":
                 moves = field.getPossibleMovesForTile(x)
@@ -44,7 +44,7 @@ def AStarSearch(field, startState, stateQueue, visited):
         state = statePrio[2]
         if state[exit] == "R":
             solution = backtrace(parent, startState, state)
-        field.updateTiles(state)
+        field.setTiles(state)
         for x in xrange(numTiles):
             if field.tiles[x] == "0":
                 moves = field.getPossibleMovesForTile(x)
