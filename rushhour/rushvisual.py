@@ -1,7 +1,7 @@
 import math
 import time
 
-from field import Field, Vehicle
+from field import Field
 from Tkinter import *
 
 class RushVisualisation:
@@ -69,3 +69,68 @@ class RushVisualisation:
 
     
 
+class Vehicle(object):
+    def __init__(self, name, orientation, color):
+        self.name = name
+        self.orientation = orientation
+        self.color = color
+
+    def getColor(self):
+        return self.color
+
+    def getCoor(self, field):
+        self.len_tiles = len(field.tiles)
+        rowx = {}
+        xcoor = []
+        coordinates = []
+        for i in range(field.length):
+            rowx[i+1] = field.tiles[(len(field.tiles)/field.length)*(i):(len(field.tiles)/field.length)*(i+1)]
+            if self.name in rowx[i+1]:
+                xcoor.append(i+1)
+
+        for row in rowx.values():
+            for i in range(field.length):
+                if row[i] == self.name:
+                    for coor in xcoor:
+                        if (i+1,coor) not in coordinates:
+                            coordinates.append((i+1,coor))
+        print coordinates
+        if len(coordinates) > 1:
+
+            miniy = coordinates[0][1]
+            maxiy = coordinates[1][1]
+            minix = coordinates[0][0]
+            maxix = coordinates[1][0]
+            if len(coordinates) == 3:
+
+                for coor in coordinates:
+                    if self.orientation == "vertical":
+                        if miniy > coor[1]:
+                            miniy = coor[1]
+                        if maxiy < coor[1]:
+                            maxiy = coor[1]
+                    else:
+                        if minix > coor[0]:
+                            minix = coor[0]
+                        if maxix < coor[0]:
+                            maxix = coor[0]
+
+            return (minix,miniy),(maxix,maxiy)
+        return (0,0),(0,0)
+
+def vehicles1():
+    return {
+        "A": Vehicle("A", "vertical", "orange"),
+        "B": Vehicle("B", "horizontal", "green"),
+        "C": Vehicle("C", "horizontal", "blue"),
+        "D": Vehicle("D", "vertical", "cyan"),
+        "E": Vehicle("E", "vertical", "orange"),
+        "F": Vehicle("F", "horizontal", "green"),
+        "G": Vehicle("G", "vertical", "cyan"),
+        "H": Vehicle("H", "horizontal", "orange"),
+        "I": Vehicle("I", "horizontal", "green"),
+        "J": Vehicle("J", "vertical", "yellow"),
+        "K": Vehicle("K", "horizontal", "blue"),
+        "L": Vehicle("L", "vertical", "orange"),
+        "R": Vehicle("R", "horizontal", "red")
+    }

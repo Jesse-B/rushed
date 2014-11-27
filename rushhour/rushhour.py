@@ -1,9 +1,10 @@
 import copy
 import games
 import Queue
+import rushvisual
 
-from field import Field, Vehicle
-from rushvisual import RushVisualisation
+from field import Field
+from rushvisual import RushVisualisation, Vehicle
 
 
 def BFSearch(field, startState, stateQueue, visited):
@@ -35,8 +36,8 @@ def backtrace(parent, start, end):
 
 if __name__ == "__main__":
     field = games.field1()
-    # vehicles = games.vehicles1()
-    # RushVisualisation(6, vehicles.values(), field)
+    vehicles = rushvisual.vehicles1()
+    RushVisualisation(6, vehicles.values(), field)
     queue = Queue.Queue()
     queue.put(field.tiles)
     import time
