@@ -3,13 +3,29 @@ from field import Field, Vehicle
 def grandmasterField():
     tiles = "KKKADGJBBADGJ0RRDGCCL0000EL0II0EHHFF"
     # KKKADG
-    # JBBADG
-    # J0RRDG
-    # CCL000
-    # 0EL0II
-    # 0EHHFF
+#     JBBADG
+#     J0RRDG
+#     CCL000
+#     0EL0II
+#     0EHHFF
 
-    field = Field(tiles, 6, "BCFHIKR", "ADEGJL")
+    vehicles = {
+        "A": 2,
+        "B": 2,
+        "C": 2,
+        "D": 3,
+        "E": 2,
+        "F": 2,
+        "G": 3,
+        "H": 2,
+        "I": 2,
+        "J": 2,
+        "K": 3,
+        "L": 2,
+        "R": 2
+    }
+
+    field = Field(tiles, 6, set(["B", "C", "F", "H", "I", "K", "R"]), set(["A", "D", "E", "G", "J", "L"]), vehicles)
     return field
 
 def grandmasterVehicles():
@@ -123,17 +139,42 @@ def vehicles3():
 def field4():
     tiles = "ABBB0U000A00C0UVVV000C0U00TDD0C0SSSTERRF0000TE0GF0QQQPHHGKLL00PI0GKM000PIJJJMNNOO"
     
-#    ABBB0U000
-#    A00C0UVVV
-#    000C0U00T
-#    DD0C0SSST
-#    ERRF0000T
-#    E0GF0QQQP
-#    HHGKLL00P
-#    I0GKM000P
-#    IJJJMNNOO
-    
-    field = Field(tiles, 9, "BDHJLNOQSVR", "ACEFGIKMPTU")
+   # ABBB0U000
+   # A00C0UVVV
+   # 000C0U00T
+   # DD0C0SSST
+   # ERRF0000T
+   # E0GF0QQQP
+   # HHGKLL00P
+   # I0GKM000P
+   # IJJJMNNOO
+
+    vehicles = {
+        "A": 2,
+        "B": 3,
+        "C": 3,
+        "D": 2,
+        "E": 2,
+        "F": 2,
+        "G": 3,
+        "H": 2,
+        "I": 2,
+        "J": 3,
+        "K": 2,
+        "L": 2,
+        "M": 2,
+        "N": 2,
+        "O": 2,
+        "P": 3,
+        "Q": 3,
+        "S": 3,
+        "T": 3,
+        "U": 3,
+        "V": 3,
+        "R": 2
+    }
+
+    field = Field(tiles, 9, set(["B", "D", "H", "J", "L", "N", "O", "Q", "S", "V", "R"]), set(["A", "C", "E", "F", "G", "I", "K", "M", "P", "T", "U"]), vehicles)
     return field
     
 def vehicles4():
