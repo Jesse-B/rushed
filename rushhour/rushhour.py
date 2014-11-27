@@ -66,21 +66,13 @@ def calculateScore(state, exit):
     return score
 
 if __name__ == "__main__":
-<<<<<<< HEAD
     field = games.field1()
     vehicles = rushvisual.vehicles1()
-    RushVisualisation(6, vehicles.values(), field)
-    queue = Queue.Queue()
-    queue.put(field.tiles)
-=======
-    field = games.field4()
-    # vehicles = games.vehicles1()
     # RushVisualisation(6, vehicles.values(), field)
     # queue = Queue.Queue()
 #     queue.put(field.tiles)
     queue = Queue.PriorityQueue()
     queue.put((0, 0, field.tiles))
->>>>>>> origin/master
     import time
     now = time.time()
     # a = BFSearch(field, field.tiles, queue, set([field.tiles]))
