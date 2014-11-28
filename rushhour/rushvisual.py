@@ -45,6 +45,10 @@ class RushVisualisation:
             x2, y2 = self._map_coords(width, i)
             self.w.create_line(x1, y1, x2, y2)
 
+        endx1, endy1 = self._map_coords(6, 2)
+        endx2, endy2 = self._map_coords(6.3, 3)
+        self.w.create_rectangle(endx1, endy1, endx2, endy2, fill = "gray")
+        
         for field in fields:
             self.removeCar(draw)
             for vehicle in vehicles:
@@ -58,11 +62,9 @@ class RushVisualisation:
         #     print vehicle.getName()
         #     self.car(vehicle, field, length)
 
-        endx1, endy1 = self._map_coords(6, 2)
-        endx2, endy2 = self._map_coords(6.3, 3)
-        self.w.create_rectangle(endx1, endy1, endx2, endy2, fill = "gray")
 
-        self.master.update()
+
+        # self.master.update()
 
         self.master.mainloop()
 
