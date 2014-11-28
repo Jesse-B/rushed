@@ -5,13 +5,14 @@ from field import Field
 from Tkinter import *
 
 class RushVisualisation:
-    def __init__(self, length, vehicles, field):
+    def __init__(self, length, vehicles, fields, delay = 0.2):
         width = length
         height = length
         self.width = width
         self.height = height
         self.max_dim = max(width + 0.5, height)
-        self.field = field
+        self.fields = fields
+        self.delay = delay
 
         # Initialize a drawing surface
         self.master = Tk()
@@ -34,6 +35,7 @@ class RushVisualisation:
                                                              fill = "gray")
 
         # Draw gridlines
+        draw = []
         for i in range(width + 1):
             x1, y1 = self._map_coords(i, 0)
             x2, y2 = self._map_coords(i, height)
@@ -42,8 +44,19 @@ class RushVisualisation:
             x1, y1 = self._map_coords(0, i)
             x2, y2 = self._map_coords(width, i)
             self.w.create_line(x1, y1, x2, y2)
-        for vehicle in vehicles:
-            self.car(vehicle, field, length)
+
+        for field in fields:
+            self.removeCar(draw)
+            for vehicle in vehicles:
+                # self.car(vehicle, field, length)
+                draw.append(self.car(vehicle, field, length))
+            self.master.update()
+            time.sleep(self.delay)
+
+        # for vehicle in vehicles:
+        #     print len(vehicles)
+        #     print vehicle.getName()
+        #     self.car(vehicle, field, length)
 
         endx1, endy1 = self._map_coords(6, 2)
         endx2, endy2 = self._map_coords(6.3, 3)
@@ -60,12 +73,20 @@ class RushVisualisation:
                 250 + 450 * ((y - self.height / 2.0) / self.max_dim))
 
     def car(self, vehicle, field, length):
-        x1, y1 = vehicle.getCoor(field)[0]
-        x2, y2 = vehicle.getCoor(field)[1]
-        # x1, y1, x2, y2 = vehicle.getCoor(field)
+        x1, y1 = vehicle.getCoor(field, length)[0]
+        # print x1, y1
+        x2, y2 = vehicle.getCoor(field, length)[1]
+        # print x2, y2
         xa1, ya1 = self._map_coords(x1 - 1,y1 - 1)
         xa2, ya2 = self._map_coords(x2, y2)
         return self.w.create_rectangle(xa1, ya1, xa2, ya2, fill=vehicle.getColor())
+
+    def removeCar(self, allCars):
+        # remove all the cars
+        if allCars:
+            for car in allCars:
+                self.w.delete(car)
+                self.master.update_idletasks()
 
     
 
@@ -78,59 +99,49 @@ class Vehicle(object):
     def getColor(self):
         return self.color
 
-    def getCoor(self, field):
-        self.len_tiles = len(field.tiles)
+    def getName(self):
+        return self.name
+
+    def getCoor(self, field, length):
+        self.len_tiles = len(field)
         rowx = {}
         xcoor = []
         coordinates = []
-        for i in range(field.length):
-            rowx[i+1] = field.tiles[(len(field.tiles)/field.length)*(i):(len(field.tiles)/field.length)*(i+1)]
+        for i in range(length):
+            rowx[i+1] = field[self.len_tiles/length*(i):self.len_tiles/length*(i+1)]
             if self.name in rowx[i+1]:
                 xcoor.append(i+1)
 
         for row in rowx.values():
-            for i in range(field.length):
+            for i in range(length):
                 if row[i] == self.name:
                     for coor in xcoor:
                         if (i+1,coor) not in coordinates:
                             coordinates.append((i+1,coor))
-        print coordinates
-        if len(coordinates) > 1:
+        
+        minix = coordinates[0][0]
+        miniy = coordinates[0][1]
 
-            miniy = coordinates[0][1]
-            maxiy = coordinates[1][1]
-            minix = coordinates[0][0]
+        if len(coordinates) == 2:
             maxix = coordinates[1][0]
-            if len(coordinates) == 3:
+            maxiy = coordinates[1][1]
 
-                for coor in coordinates:
-                    if self.orientation == "vertical":
-                        if miniy > coor[1]:
-                            miniy = coor[1]
-                        if maxiy < coor[1]:
-                            maxiy = coor[1]
-                    else:
-                        if minix > coor[0]:
-                            minix = coor[0]
-                        if maxix < coor[0]:
-                            maxix = coor[0]
+        else:
+            maxix = coordinates[2][0]
+            maxiy = coordinates[2][1]
 
-            return (minix,miniy),(maxix,maxiy)
-        return (0,0),(0,0)
+        return (minix,miniy),(maxix,maxiy)
 
 def vehicles1():
     return {
         "A": Vehicle("A", "vertical", "orange"),
-        "B": Vehicle("B", "horizontal", "green"),
-        "C": Vehicle("C", "horizontal", "blue"),
-        "D": Vehicle("D", "vertical", "cyan"),
-        "E": Vehicle("E", "vertical", "orange"),
-        "F": Vehicle("F", "horizontal", "green"),
-        "G": Vehicle("G", "vertical", "cyan"),
-        "H": Vehicle("H", "horizontal", "orange"),
-        "I": Vehicle("I", "horizontal", "green"),
-        "J": Vehicle("J", "vertical", "yellow"),
-        "K": Vehicle("K", "horizontal", "blue"),
-        "L": Vehicle("L", "vertical", "orange"),
+        "B": Vehicle("B", "horizontal", "blue"),
+        "C": Vehicle("C", "vertical", "purple"),
+        "D": Vehicle("D", "vertical", "orange"),
+        "E": Vehicle("E", "horizontal", "green"),
+        "F": Vehicle("F", "horizontal", "orange"),
+        "G": Vehicle("G", "horizontal", "blue"),
+        "H": Vehicle("H", "vertical", "yellow"),
         "R": Vehicle("R", "horizontal", "red")
     }
+

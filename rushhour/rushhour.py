@@ -77,9 +77,11 @@ if __name__ == "__main__":
     now = time.time()
     # a = BFSearch(field, field.tiles, queue, set([field.tiles]))
     a = AStarSearch(field, field.tiles, queue, set([field.tiles]))
+    print a
     print time.time() - now
     # for state in a:
-        # RushVisualisation(6, vehicles.values(), state)
+    #     field = Field(state, 6, set(["B", "E", "F", "G", "R"]), set(["A", "C", "D", "H"]), vehicles)
+    RushVisualisation(6, vehicles.values(), a)
         # print Field(state, field.length, field.horizontalCars, field.verticalCars)
-    print "Steps:", len(a) - 1
+    # print "Steps:", len(a) - 1
     
