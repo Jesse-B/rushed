@@ -1,10 +1,9 @@
 import time
 import games
 import Queue
-import rushvisual
 
 from field import Field
-from rushvisual import RushVisualisation, Vehicle
+from rushvisual import RushVisualisation, Vehicle, vehicles1
 
 
 def BFSearch(field, startState, stateQueue, visited):
@@ -75,7 +74,7 @@ def calculateScore(state, exit, vehicles):
 
 if __name__ == "__main__":
     field = games.field4()
-    vehicles = rushvisual.vehicles1()
+    # vehicles = vehicles1()
     # RushVisualisation(6, vehicles.values(), field)
 
     # Breadth First
@@ -95,4 +94,8 @@ if __name__ == "__main__":
     now = time.time()
     a = AStarSearch(field, field.tiles, priorityQueue, set([field.tiles]))
     print time.time() - now
-    print "Steps:", len(a) - 1
+    # for state in a:
+    #     field = Field(state, 6, set(["B", "E", "F", "G", "R"]), set(["A", "C", "D", "H"]), vehicles)
+    # RushVisualisation(6, vehicles.values(), a)
+        # print Field(state, field.length, field.horizontalCars, field.verticalCars)
+    # print "Steps:", len(a) - 1
