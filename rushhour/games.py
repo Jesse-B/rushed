@@ -65,13 +65,30 @@ def field1():
     
 def field2():
     tiles = "00KKLL0HHIIJ00RRGJBBCCGJA00DFFA00DEE"
-#    00KKLL
-#    0HHIIJ
-#    00RRGJ
-#    BBCCGJ
-#    A00DFF
-#    A00DEE
-    field = Field(tiles, 6, "BCEFHIKLR", "ADGJ")
+    # 00KKLL
+#     0HHIIJ
+#     00RRGJ
+#     BBCCGJ
+#     A00DFF
+#     A00DEE
+
+    vehicles = {
+        "A": 2,
+        "B": 2,
+        "C": 2,
+        "D": 2,
+        "E": 2,
+        "F": 2,
+        "G": 2,
+        "H": 2,
+        "I": 2,
+        "J": 3,
+        "K": 2,
+        "L": 2,
+        "R": 2
+    }
+
+    field = Field(tiles, 6, set(["B","C","E","F","H","I","K","L","R"]), set(["A","D","G","J"]), vehicles)
     return field
     
 def vehicles2():
@@ -99,7 +116,25 @@ def field3():
 #    GGFHHI
 #    J0K0LL
 #    J0K000
-    field = Field(tiles, 6, "ABCEGHLR", "DFIJK")
+
+    vehicles = {
+        "A": 2,
+        "B": 3,
+        "C": 2,
+        "D": 2,
+        "E": 2,
+        "F": 2,
+        "G": 2,
+        "H": 2,
+        "I": 2,
+        "J": 2,
+        "K": 2,
+        "L": 2,
+        "R": 2
+    }
+    
+
+    field = Field(tiles, 6, set(["A","B","C","E","G","H","L","R"]), set(["D","F","I","J","K"]), vehicles)
     return field
     
 def vehicles3():
@@ -190,7 +225,7 @@ def field5():
     tiles = "AAAB0VW00000B0VWXX000BUUS000000QQSTT00FFFNRRPC0G00N00PC0GKKNOOPDEHHJLLLMDEIIJ000M"
     
 #    AAAB0VW00
-#    000B0VWXX   
+#    000B0VWXX
 #    000BUUS00
 #    0000QQSTT
 #    00FFFNRRP
@@ -198,8 +233,35 @@ def field5():
 #    C0GKKNOOP
 #    DEHHJLLLM
 #    DEIIJ000M
-    
-    field = Field(tiles, 9, "AFHIKLOQTUXR", "BCDEGJMNPSVW")
+
+    vehicles = {
+        "A": 3,
+        "B": 3,
+        "C": 2,
+        "D": 2,
+        "E": 2,
+        "F": 3,
+        "G": 2,
+        "H": 2,
+        "I": 2,
+        "J": 2,
+        "K": 2,
+        "L": 3,
+        "M": 2,
+        "N": 3,
+        "O": 2,
+        "P": 3,
+        "Q": 2,
+        "S": 2,
+        "T": 2,
+        "U": 2,
+        "V": 2,
+        "W": 2,
+        "X": 2,
+        "R": 2
+    }
+
+    field = Field(tiles, 9, set(["A","F","H","I","K","L","O","Q","T","U","X","R"]), set(["B","C","D","E","G","J","M","N","P","S","V","W"]), vehicles)
     return field
 
 def vehicles5():
@@ -233,7 +295,7 @@ def vehicles5():
     
 def field6():
     tiles = "AABBM00Z0CDDDMOOZ0C0EENP0YY00KLNPXXXRRKL000000G0LQQVVWFGJJSUUUWF0IISTT0WFHHHS0000"
-    
+
 #    AABBM00Z0
 #    CDDDMOOZ0
 #    C0EENP0YY
@@ -243,8 +305,37 @@ def field6():
 #    FGJJSUUUW
 #    F0IISTT0W
 #    FHHHS0000
-    
-    field = Field(tiles, 9, "ABDEHIJOQTUVXYR", "CFGKLMNPSWZ")
+
+    vehicles = {
+        "A": 2,
+        "B": 2,
+        "C": 2,
+        "D": 3,
+        "E": 2,
+        "F": 3,
+        "G": 2,
+        "H": 3,
+        "I": 2,
+        "J": 2,
+        "K": 2,
+        "L": 3,
+        "M": 2,
+        "N": 2,
+        "O": 2,
+        "P": 3,
+        "Q": 2,
+        "S": 2,
+        "T": 2,
+        "U": 3,
+        "V": 2,
+        "W": 3,
+        "X": 3,
+        "Y": 2,
+        "Z": 2,
+        "R": 2
+    }
+
+    field = Field(tiles, 9, set(["A","B","D","E","H","I","J","O","Q","T","U","V","X","Y","R"]), set(["C","F","G","K","L","M","N","P","S","W","Z"]), vehicles)
     return field
     
 def vehicles6():
