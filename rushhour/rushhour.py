@@ -75,7 +75,7 @@ def calculateScore(state, exit, vehicles):
 
 if __name__ == "__main__":
     # field = games.field1()
-# #     # vehicles = vehicles1()
+    vehicles = vehicles1()
 # #     # RushVisualisation(6, vehicles.values(), field)
 # #
     # Breadth First
@@ -98,6 +98,7 @@ if __name__ == "__main__":
             now = time.time()
             print "Solving puzzle 1:"
             b = BFSearch(field, field.tiles, queue, set([field.tiles]))
+            RushVisualisation(6, vehicles.values(), b)
             print "Time:", time.time() - now, "seconds"
             # for state in b:
                 # RushVisualisation(6, vehicles.values(), state)
