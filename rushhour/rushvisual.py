@@ -163,3 +163,20 @@ def vehicles2():
         "L": Vehicle("L", "horizontal", "orange"),
         "R": Vehicle("R", "horizontal", "red")
         }
+
+def vehicles3():
+    return {
+        "A": Vehicle("A", "horizontal", "blue"),
+        "B": Vehicle("B", "horizontal", "yellow"),
+        "C": Vehicle("C", "horizontal", "orange"),
+        "D": Vehicle("D", "vertical", "blue"), 
+        "E": Vehicle("E", "horizontal", "green"),
+        "F": Vehicle("F", "vertical", "cyan"), 
+        "G": Vehicle("G", "horizontal", "green"), 
+        "H": Vehicle("H", "horizontal", "blue"),
+        "I": Vehicle("I", "vertical", "cyan"), 
+        "J": Vehicle("J", "vertical", "orange"),
+        "K": Vehicle("K", "vertical", "green"),
+        "L": Vehicle("L", "horizontal", "green"),
+        "R": Vehicle("R", "horizontal", "red")
+    }

@@ -5,7 +5,7 @@ import collections
 from Tkinter import *
 from timeit import Timer
 from field import Field
-from rushvisual import RushVisualisation, Vehicle, vehicles1, vehicles2
+from rushvisual import RushVisualisation, Vehicle, vehicles1, vehicles2, vehicles3
 
 
 def BFSearch(field, startState, stateQueue, visited):
@@ -80,6 +80,7 @@ if __name__ == "__main__":
 # #     # RushVisualisation(6, vehicles.values(), field)
 # #
     vehicles_2 = vehicles2()
+    vehicles_3 = vehicles3()
     # Breadth First
     queue = collections.deque()
     # queue.append(field.tiles)
@@ -109,7 +110,7 @@ if __name__ == "__main__":
 
             # self.vis(self.fields, vehicles)
 
-            button = Button(master, text="Visualisatie", command=lambda: RushVisualisation(6, vehicles.values(), b, w, master))
+            button = Button(master, text="Visualisatie1", command=lambda: RushVisualisation(6, vehicles.values(), b, w, master))
             button.pack()
 
 
@@ -129,7 +130,7 @@ if __name__ == "__main__":
             b2 = BFSearch(field, field.tiles, queue, set([field.tiles]))
             button2 = Button(master, text="Visualisatie2", command=lambda: RushVisualisation(6, vehicles_2.values(), b2, w, master))
             button2.pack()
-            master.mainloop()
+
             # RushVisualisation(6, vehicles.values(), b)
             # print "Time:", time.time() - now, "seconds"
             # for state in b:
@@ -137,11 +138,15 @@ if __name__ == "__main__":
                 # print Field(state, field.length, field.horizontalCars, field.verticalCars)
             # print "Steps:", len(b[0]) - 1
             queue.clear()
-            field = games.field1()
+            field = games.field3()
             queue.append(field.tiles)
             now = time.time()
             # print "Solving puzzle 1:"
-            b = BFSearch(field, field.tiles, queue, set([field.tiles]))
+            b3 = BFSearch(field, field.tiles, queue, set([field.tiles]))
+            button3 = Button(master, text="Visualisatie3", command=lambda: RushVisualisation(6, vehicles_3.values(), b3, w, master))
+            button3.pack()
+            master.mainloop()
+
     #         print "Time:", time.time() - now, "seconds"
 
 
