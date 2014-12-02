@@ -82,6 +82,7 @@ if __name__ == "__main__":
 # #
     vehicles_2 = vehicles2()
     vehicles_3 = vehicles3()
+    vehicles_4 = vehicles4()
     # Breadth First
     queue = collections.deque()
     # queue.append(field.tiles)
@@ -160,7 +161,7 @@ if __name__ == "__main__":
     queue.clear()
     field4 = games.field4()
     priorityQueue = Queue.PriorityQueue()
-    priorityQueue.put((0, 0, field.tiles))
+    priorityQueue.put((0, 0, field4.tiles))
     now = time.time()
     a4 = AStarSearch(field4, field4.tiles, priorityQueue, set([field4.tiles]))
     button4 = Button(master, text="Visualisatie4", command=lambda: RushVisualisation(9, vehicles_4.values(), a4, w, master))
