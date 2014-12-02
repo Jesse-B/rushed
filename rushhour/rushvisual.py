@@ -6,29 +6,20 @@ from field import Field
 from Tkinter import *
 
 class RushVisualisation:
-    def __init__(self, length, vehicles, fields):
+    def __init__(self, length, vehicles, fields, canvas, the_object, delay = 0.2):
         self.length = length
         self.width = self.length
         self.height = self.length
         self.max_dim = max(self.width + 0.5, self.height)
         self.vehicles = vehicles
         self.fields = fields
+        self.w = canvas
+        self.master = the_object
+
+        # self.master.mainloop()
 
 
-        # Initialize a drawing surface
-        self.master = Tk()
-        self.w = Canvas(self.master, width=500, height=500)
-        self.w.pack()
-        self.master.update()
-
-        # self.vis(self.fields, vehicles)
-
-        b = Button(self.master, text="Visualisatie", command=lambda: self.vis(self.fields, self.vehicles, self.width, self.height))
-        b.pack()
-        self.master.mainloop()
-
-
-    def vis(self, fields, width, height, vehicles, delay = 0.2):
+    # def vis(self, fields, width, height, vehicles, delay = 0.2):
         # Draw a backing and lines
         x1, y1 = self._map_coords(0, 0)
         x2, y2 = self._map_coords(self.width, self.height)
@@ -59,8 +50,9 @@ class RushVisualisation:
         # print "Visualisatie"
         draw = []
         for vehicle in self.vehicles:
+            print vehicle
                 # self.car(vehicle, field, length)
-                draw.append(self.car(vehicle, fields[0], self.length))
+            draw.append(self.car(vehicle, fields[0], self.length))
         for field in range(len(fields)):
             if field > 0:
                 for num in range(len(fields[field])):
@@ -73,9 +65,6 @@ class RushVisualisation:
                                 self.removeCar(element)
                                 draw.remove(element)
                                 draw.append(self.car(the_car, fields[field], self.length))
-            # for vehicle in self.vehicles:
-            #     # self.car(vehicle, field, length)
-            #     draw.append(self.car(vehicle, fields[field], self.length))
             self.master.update()
             time.sleep(delay)        
 
@@ -158,3 +147,19 @@ def vehicles1():
         "R": Vehicle("R", "horizontal", "red")
     }
 
+def vehicles2():
+    return {
+        "A": Vehicle("A", "vertical", "orange"),
+        "B": Vehicle("B", "horizontal", "green"),
+        "C": Vehicle("C", "horizontal", "blue"),
+        "D": Vehicle("D", "vertical", "cyan"),
+        "E": Vehicle("E", "horizontal", "orange"),
+        "F": Vehicle("F", "horizontal", "green"),
+        "G": Vehicle("G", "vertical", "cyan"),
+        "H": Vehicle("H", "horizontal", "orange"),
+        "I": Vehicle("I", "horizontal", "green"),
+        "J": Vehicle("J", "vertical", "yellow"),
+        "K": Vehicle("K", "horizontal", "blue"),
+        "L": Vehicle("L", "horizontal", "orange"),
+        "R": Vehicle("R", "horizontal", "red")
+        }

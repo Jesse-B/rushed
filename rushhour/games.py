@@ -91,22 +91,22 @@ def field2():
     field = Field(tiles, 6, set(["B","C","E","F","H","I","K","L","R"]), set(["A","D","G","J"]), vehicles)
     return field
     
-def vehicles2():
-    return {
-        "A": Vehicle("A", "vertical", "orange"),
-        "B": Vehicle("B", "horizontal", "green"),
-        "C": Vehicle("C", "horizontal", "blue"),
-        "D": Vehicle("D", "vertical", "cyan"),
-        "E": Vehicle("E", "horizontal", "orange"),
-        "F": Vehicle("F", "horizontal", "green"),
-        "G": Vehicle("G", "vertical", "cyan"),
-        "H": Vehicle("H", "horizontal", "orange"),
-        "I": Vehicle("I", "horizontal", "green"),
-        "J": Vehicle("J", "vertical", "yellow"),
-        "K": Vehicle("K", "horizontal", "blue"),
-        "L": Vehicle("L", "horizontal", "orange"),
-        "R": Vehicle("R", "horizontal", "red")
-        }
+# def vehicles2():
+#     return {
+#         "A": Vehicle("A", "vertical", "orange"),
+#         "B": Vehicle("B", "horizontal", "green"),
+#         "C": Vehicle("C", "horizontal", "blue"),
+#         "D": Vehicle("D", "vertical", "cyan"),
+#         "E": Vehicle("E", "horizontal", "orange"),
+#         "F": Vehicle("F", "horizontal", "green"),
+#         "G": Vehicle("G", "vertical", "cyan"),
+#         "H": Vehicle("H", "horizontal", "orange"),
+#         "I": Vehicle("I", "horizontal", "green"),
+#         "J": Vehicle("J", "vertical", "yellow"),
+#         "K": Vehicle("K", "horizontal", "blue"),
+#         "L": Vehicle("L", "horizontal", "orange"),
+#         "R": Vehicle("R", "horizontal", "red")
+#         }
 
 def field3():
     tiles = "0AABBB0CCDEERRFD0IGGFHHIJ0K0LLJ0K000"

@@ -2,9 +2,10 @@ import time
 import games
 import collections
 
+from Tkinter import *
 from timeit import Timer
 from field import Field
-from rushvisual import RushVisualisation, Vehicle, vehicles1
+from rushvisual import RushVisualisation, Vehicle, vehicles1, vehicles2
 
 
 def BFSearch(field, startState, stateQueue, visited):
@@ -78,6 +79,7 @@ if __name__ == "__main__":
     vehicles = vehicles1()
 # #     # RushVisualisation(6, vehicles.values(), field)
 # #
+    vehicles_2 = vehicles2()
     # Breadth First
     queue = collections.deque()
     # queue.append(field.tiles)
@@ -98,7 +100,20 @@ if __name__ == "__main__":
             now = time.time()
             # print "Solving puzzle 1:" 
             b = BFSearch(field, field.tiles, queue, set([field.tiles]))
-            RushVisualisation(6, vehicles.values(), b)
+
+            # Initialize a drawing surface
+            master = Tk()
+            w = Canvas(master, width=500, height=500)
+            w.pack()
+            master.update()
+
+            # self.vis(self.fields, vehicles)
+
+            button = Button(master, text="Visualisatie", command=lambda: RushVisualisation(6, vehicles.values(), b, w, master))
+            button.pack()
+
+
+            # RushVisualisation(6, vehicles.values(), b)
             print "Aantal stappen: ", len(b)
             # print "Time:", time.time() - now, "seconds"
             # for state in b:
@@ -110,7 +125,11 @@ if __name__ == "__main__":
             queue.append(field.tiles)
             now = time.time()
             # print "Solving puzzle 2:"
-            b = BFSearch(field, field.tiles, queue, set([field.tiles]))
+            
+            b2 = BFSearch(field, field.tiles, queue, set([field.tiles]))
+            button2 = Button(master, text="Visualisatie2", command=lambda: RushVisualisation(6, vehicles_2.values(), b2, w, master))
+            button2.pack()
+            master.mainloop()
             # RushVisualisation(6, vehicles.values(), b)
             # print "Time:", time.time() - now, "seconds"
             # for state in b:
