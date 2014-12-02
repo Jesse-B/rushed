@@ -1,18 +1,19 @@
 import math
 import time
+import copy
 
 from field import Field
 from Tkinter import *
 
 class RushVisualisation:
-    def __init__(self, length, vehicles, fields, delay = 0.2):
-        width = length
-        height = length
-        self.width = width
-        self.height = height
-        self.max_dim = max(width + 0.5, height)
+    def __init__(self, length, vehicles, fields):
+        self.length = length
+        self.width = self.length
+        self.height = self.length
+        self.max_dim = max(self.width + 0.5, self.height)
+        self.vehicles = vehicles
         self.fields = fields
-        self.delay = delay
+
 
         # Initialize a drawing surface
         self.master = Tk()
@@ -20,53 +21,63 @@ class RushVisualisation:
         self.w.pack()
         self.master.update()
 
+        # self.vis(self.fields, vehicles)
+
+        b = Button(self.master, text="Visualisatie", command=lambda: self.vis(self.fields, self.vehicles, self.width, self.height))
+        b.pack()
+        self.master.mainloop()
+
+
+    def vis(self, fields, width, height, vehicles, delay = 0.2):
         # Draw a backing and lines
         x1, y1 = self._map_coords(0, 0)
-        x2, y2 = self._map_coords(width, height)
+        x2, y2 = self._map_coords(self.width, self.height)
         self.w.create_rectangle(x1, y1, x2, y2, fill = "white")
 
         # Draw gray squares for tiles
         self.tiles = {}
-        for i in range(width):
-            for j in range(height):
+        for i in range(self.width):
+            for j in range(self.height):
                 x1, y1 = self._map_coords(i, j)
                 x2, y2 = self._map_coords(i + 1, j + 1)
                 self.tiles[(i, j)] = self.w.create_rectangle(x1, y1, x2, y2,
                                                              fill = "gray")
 
         # Draw gridlines
-        draw = []
-        for i in range(width + 1):
+        for i in range(self.width + 1):
             x1, y1 = self._map_coords(i, 0)
-            x2, y2 = self._map_coords(i, height)
+            x2, y2 = self._map_coords(i, self.height)
             self.w.create_line(x1, y1, x2, y2)
-        for i in range(height + 1):
+        for i in range(self.height + 1):
             x1, y1 = self._map_coords(0, i)
-            x2, y2 = self._map_coords(width, i)
+            x2, y2 = self._map_coords(self.width, i)
             self.w.create_line(x1, y1, x2, y2)
 
         endx1, endy1 = self._map_coords(6, 2)
         endx2, endy2 = self._map_coords(6.3, 3)
         self.w.create_rectangle(endx1, endy1, endx2, endy2, fill = "gray")
-        
-        for field in fields:
-            self.removeCar(draw)
-            for vehicle in vehicles:
+        # print "Visualisatie"
+        draw = []
+        for vehicle in self.vehicles:
                 # self.car(vehicle, field, length)
-                draw.append(self.car(vehicle, field, length))
+                draw.append(self.car(vehicle, fields[0], self.length))
+        for field in range(len(fields)):
+            if field > 0:
+                for num in range(len(fields[field])):
+                    # print fields[field][num], fields[field - 1][num]
+                    if fields[field][num] != fields[field - 1][num]:
+                        for element in draw:
+                            print element[1].getName(), fields[field][num]
+                            if element[1].getName() == fields[field][num]:
+                                the_car = copy.copy(element[1])
+                                self.removeCar(element)
+                                draw.remove(element)
+                                draw.append(self.car(the_car, fields[field], self.length))
+            # for vehicle in self.vehicles:
+            #     # self.car(vehicle, field, length)
+            #     draw.append(self.car(vehicle, fields[field], self.length))
             self.master.update()
-            time.sleep(self.delay)
-
-        # for vehicle in vehicles:
-        #     print len(vehicles)
-        #     print vehicle.getName()
-        #     self.car(vehicle, field, length)
-
-
-
-        # self.master.update()
-
-        self.master.mainloop()
+            time.sleep(delay)        
 
 
     def _map_coords(self, x, y):
@@ -81,7 +92,7 @@ class RushVisualisation:
         # print x2, y2
         xa1, ya1 = self._map_coords(x1 - 1,y1 - 1)
         xa2, ya2 = self._map_coords(x2, y2)
-        return self.w.create_rectangle(xa1, ya1, xa2, ya2, fill=vehicle.getColor())
+        return self.w.create_rectangle(xa1, ya1, xa2, ya2, fill=vehicle.getColor()), vehicle
 
     def removeCar(self, allCars):
         # remove all the cars
