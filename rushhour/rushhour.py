@@ -1,11 +1,12 @@
 import time
 import games
 import collections
+import Queue
 
 from Tkinter import *
 from timeit import Timer
 from field import Field
-from rushvisual import RushVisualisation, Vehicle, vehicles1, vehicles2, vehicles3
+from rushvisual import RushVisualisation, Vehicle, vehicles1, vehicles2, vehicles3, vehicles4
 
 
 def BFSearch(field, startState, stateQueue, visited):
@@ -145,7 +146,6 @@ if __name__ == "__main__":
             b3 = BFSearch(field, field.tiles, queue, set([field.tiles]))
             button3 = Button(master, text="Visualisatie3", command=lambda: RushVisualisation(6, vehicles_3.values(), b3, w, master))
             button3.pack()
-            master.mainloop()
 
     #         print "Time:", time.time() - now, "seconds"
 
@@ -157,11 +157,16 @@ if __name__ == "__main__":
 #     print time.time() - now
 
     # # A*
-    # field = games.field5()
-    # priorityQueue = Queue.PriorityQueue()
-    # priorityQueue.put((0, 0, field.tiles))
-    # now = time.time()
-    # a = AStarSearch(field, field.tiles, priorityQueue, set([field.tiles]))
+    queue.clear()
+    field4 = games.field4()
+    priorityQueue = Queue.PriorityQueue()
+    priorityQueue.put((0, 0, field.tiles))
+    now = time.time()
+    a4 = AStarSearch(field4, field4.tiles, priorityQueue, set([field4.tiles]))
+    button4 = Button(master, text="Visualisatie4", command=lambda: RushVisualisation(9, vehicles_4.values(), a4, w, master))
+    button4.pack()
+    master.mainloop()
+
     # print time.time() - now
     # for state in a:
     #     field = Field(state, 6, set(["B", "E", "F", "G", "R"]), set(["A", "C", "D", "H"]), vehicles)
