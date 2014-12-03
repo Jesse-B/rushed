@@ -368,3 +368,148 @@ def vehicles6():
         "R": Vehicle("R", "horizontal", "red")
     }
   
+def field7():
+    tiles = "A00000XUUUVVA0000TX000(-BBBCCTYWW0(-DE000SY^^&&0DEFFFSY%%%00DERRQZ000000GGGOQZ170899HHHOPP1708!!IIJNNN16660$00JMMM2055@$0000002004@#0KKLLL2334@#"
+    
+    #A00000XUUUVV
+    #A0000TX000(-
+    #BBBCCTYWW0(-
+    #DE000SY^^&&0
+    #DEFFFSY%%%00
+    #DERRQZ000000
+    #GGGOQZ170899
+    #HHHOPP1708!!
+    #IIJNNN16660$
+    #00JMMM2055@$
+    #0000002004@#
+    #0KKLLL2334@#
+    vehicles = {
+        "A": 2,
+        "B": 3,
+        "C": 2,
+        "D": 3,
+        "E": 3,
+        "F": 3,
+        "G": 3,
+        "H": 3,
+        "I": 2,
+        "J": 2,
+        "K": 2,
+        "L": 3,
+        "M": 3,
+        "N": 3,
+        "O": 2,
+        "P": 2,
+        "Q": 2,
+        "S": 2,
+        "T": 2,
+        "U": 3,
+        "V": 2,
+        "W": 2,
+        "X": 2,
+        "Y": 3,
+        "Z": 2,
+        "1": 3,
+        "2": 3,
+        "3": 2,
+        "4": 2,
+        "5": 2,
+        "6": 3,
+        "7": 2,
+        "8": 2,
+        "9": 2,
+        "!": 2,
+        "@": 3,
+        "#": 2,
+        "$": 2,
+        "%": 3,
+        "^": 2,
+        "&": 2,
+        "(": 2, 
+        "-": 2, 
+        "R": 2,
+    }
+
+    field = Field(tiles, 12, set(["B","C","F","G","H","I","K","L","M","N","P","U","V","W","3","5","6","9","!","%","^","&","R"]),\
+    set(["A","D","E","J","O","Q","S","T","X","Y","Z","1","2","4","7","8","@","#","$","(","-"]), vehicles)
+    return field
+
+
+def vehicles7():
+    return{
+        "A": Vehicle("A", "vertical", "green"),
+        "B": Vehicle("B", "horizontal", "yellow"),
+        "C": Vehicle("C", "horizontal", "oranje"),
+        "D": Vehicle("D", "vertical", "purple"), 
+        "E": Vehicle("E", "vertical", "pink"), 
+        "F": Vehicle("F", "horizontal", "grey"),
+        "G": Vehicle("G", "horizontal", "grey"), 
+        "H": Vehicle("H", "horizontal", "yellow"),
+        "I": Vehicle("I", "horizontal", "orange"),
+        "J": Vehicle("J", "vertical", "green"),
+        "K": Vehicle("K", "horizontal", "green"),
+        "L": Vehicle("L", "horizontal", "yellow"),
+        "M": Vehicle("M", "horizontal", "yellow"),
+        "N": Vehicle("N", "horizontal", "purple"),
+        "O": Vehicle("O", "vertical", "cyan"), 
+        "P": Vehicle("P", "horizontal", "green"),
+        "Q": Vehicle("Q", "vertical", "orange"),
+        "S": Vehicle("S", "vertical", "green"), 
+        "T": Vehicle("T", "vertical", "cyan"),
+        "U": Vehicle("U", "horizontal", "purple"), 
+        "V": Vehicle("V", "horizontal", "cyan"),
+        "W": Vehicle("W", "horizontal", "green"),
+        "X": Vehicle("X", "vertical", "blue"),
+        "Y": Vehicle("Y", "vertical", "yellow"),
+        "Z": Vehicle("Z", "vertical", "cyan"), 
+        "1": Vehicle("1", "vertical", "yellow"),
+        "2": Vehicle("2", "vertical", "grey"),
+        "3": Vehicle("3", "horizontal", "blue"),
+        "4": Vehicle("4", "vertical", "cyan"), 
+        "5": Vehicle("5", "horizontal", "green"), 
+        "6": Vehicle("6", "horizontal", "yellow"),
+        "7": Vehicle("7", "vertical", "blue"), 
+        "8": Vehicle("8", "vertical", "cyan"),
+        "9": Vehicle("9", "horizontal", "green"),
+        "!": Vehicle("!", "horizontal", "blue"),
+        "@": Vehicle("@", "vertical", "purple"),
+        "#": Vehicle("#", "vertical", "cyan"),
+        "$": Vehicle("$", "vertical", "green"),
+        "%": Vehicle("%", "horizontal", "purple"),
+        "^": Vehicle("^", "horizontal", "orange"), 
+        "&": Vehicle("&", "horizontal", "cyan"),
+        "(": Vehicle("(", "vertical", "orange"), 
+        "-": Vehicle("-", "vertical", "blue"), 
+        "R": Vehicle("R", "horizontal", "red")
+    }
+  
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
