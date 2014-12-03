@@ -264,33 +264,33 @@ def field5():
     field = Field(tiles, 9, set(["A","F","H","I","K","L","O","Q","T","U","X","R"]), set(["B","C","D","E","G","J","M","N","P","S","V","W"]), vehicles)
     return field
 
-def vehicles5():
-    return {
-        "A": Vehicle("A", "horizontal", "yellow"),
-        "B": Vehicle("B", "vertical", "purple"),
-        "C": Vehicle("C", "vertical", "blue"),
-        "D": Vehicle("D", "vertical", "cyan"), 
-        "E": Vehicle("E", "vertical", "green"),
-        "F": Vehicle("F", "horizontal", "yellow"),
-        "G": Vehicle("G", "vertical", "orange"), 
-        "H": Vehicle("H", "horizontal", "blue"),
-        "I": Vehicle("I", "horizontal", "cyan"),
-        "J": Vehicle("J", "vertical", "orange"),
-        "K": Vehicle("K", "horizontal", "green"),
-        "L": Vehicle("L", "horizontal", "grey"),
-        "M": Vehicle("M", "vertical", "cyan"),
-        "N": Vehicle("N", "vertical", "purple"),
-        "O": Vehicle("O", "horizontal", "green"), 
-        "P": Vehicle("P", "vertical", "yellow"),
-        "Q": Vehicle("Q", "horizontal", "blue"),
-        "S": Vehicle("S", "vertical", "cyan"), 
-        "T": Vehicle("T", "horizontal", "orange"),
-        "U": Vehicle("U", "horizontal", "orange"), 
-        "V": Vehicle("V", "vertical", "green"),
-        "W": Vehicle("W", "vertical", "blue"),
-        "X": Vehicle("X", "horizontal", "green"),
-        "R": Vehicle("R", "horizontal", "red")
-    }
+# def vehicles5():
+#     return {
+#         "A": Vehicle("A", "horizontal", "yellow"),
+#         "B": Vehicle("B", "vertical", "purple"),
+#         "C": Vehicle("C", "vertical", "blue"),
+#         "D": Vehicle("D", "vertical", "cyan"), 
+#         "E": Vehicle("E", "vertical", "green"),
+#         "F": Vehicle("F", "horizontal", "yellow"),
+#         "G": Vehicle("G", "vertical", "orange"), 
+#         "H": Vehicle("H", "horizontal", "blue"),
+#         "I": Vehicle("I", "horizontal", "cyan"),
+#         "J": Vehicle("J", "vertical", "orange"),
+#         "K": Vehicle("K", "horizontal", "green"),
+#         "L": Vehicle("L", "horizontal", "grey"),
+#         "M": Vehicle("M", "vertical", "cyan"),
+#         "N": Vehicle("N", "vertical", "purple"),
+#         "O": Vehicle("O", "horizontal", "green"), 
+#         "P": Vehicle("P", "vertical", "yellow"),
+#         "Q": Vehicle("Q", "horizontal", "blue"),
+#         "S": Vehicle("S", "vertical", "cyan"), 
+#         "T": Vehicle("T", "horizontal", "orange"),
+#         "U": Vehicle("U", "horizontal", "orange"), 
+#         "V": Vehicle("V", "vertical", "green"),
+#         "W": Vehicle("W", "vertical", "blue"),
+#         "X": Vehicle("X", "horizontal", "green"),
+#         "R": Vehicle("R", "horizontal", "red")
+#     }
     
     
 def field6():

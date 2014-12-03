@@ -113,6 +113,7 @@ if __name__ == "__main__":
             # self.vis(self.fields, vehicles)
 
             button = Button(master, text="Visualisatie1", command=lambda: RushVisualisation(6, vehicles.values(), b, w, master))
+            button.grid(row=0, column=0)
             button.pack()
 
 
@@ -131,6 +132,7 @@ if __name__ == "__main__":
             
             b2 = BFSearch(field, field.tiles, queue, set([field.tiles]))
             button2 = Button(master, text="Visualisatie2", command=lambda: RushVisualisation(6, vehicles_2.values(), b2, w, master))
+            button2.grid(row=1, column=0)
             button2.pack()
 
             # RushVisualisation(6, vehicles.values(), b)
@@ -146,6 +148,7 @@ if __name__ == "__main__":
             # print "Solving puzzle 1:"
             b3 = BFSearch(field, field.tiles, queue, set([field.tiles]))
             button3 = Button(master, text="Visualisatie3", command=lambda: RushVisualisation(6, vehicles_3.values(), b3, w, master))
+            button3.grid(row=2, column=0)
             button3.pack()
 
     #         print "Time:", time.time() - now, "seconds"
@@ -166,8 +169,21 @@ if __name__ == "__main__":
     now = time.time()
     a4 = AStarSearch(field4, field4.tiles, priorityQueue, set([field4.tiles]))
     button4 = Button(master, text="Visualisatie4", command=lambda: RushVisualisation(9, vehicles_4.values(), a4, w, master))
+    button4.grid(row=3, column=0)
     button4.pack()
+
+    # queue.clear()
+    # field5 = games.field5()
+    # priorityQueue = Queue.PriorityQueue()
+    # priorityQueue.put((0, 0, field5.tiles))
+    # now = time.time()
+    # a5 = AStarSearch(field5, field5.tiles, priorityQueue, set([field5.tiles]))
+    # button5 = Button(master, text="Visualisatie5", command=lambda: RushVisualisation(9, vehicles_5.values(), a5, w, master))
+    # button5.grid(row=4, column=0)
+    # button5.pack()
     master.mainloop()
+
+
 
     # print time.time() - now
     # for state in a:
