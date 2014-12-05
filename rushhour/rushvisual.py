@@ -6,7 +6,7 @@ from field import Field
 from Tkinter import *
 
 class RushVisualisation:
-    def __init__(self, length, vehicles, fields, canvas, the_object, delay = 0.2):
+    def __init__(self, length, vehicles, fields, canvas, the_object):
         self.length = length
         self.width = self.length
         self.height = self.length
@@ -50,23 +50,29 @@ class RushVisualisation:
         # print "Visualisatie"
         draw = []
         for vehicle in self.vehicles:
-            print vehicle
                 # self.car(vehicle, field, length)
             draw.append(self.car(vehicle, fields[0], self.length))
+        button5 = Button(self.master, text="Start", command=lambda: self.run(fields, draw, button5))
+        # button5.grid(row=5, column=0)
+        button5.pack()
+
+        
+
+    def run(self, fields, draw, button, delay = 0.2):
         for field in range(len(fields)):
             if field > 0:
                 for num in range(len(fields[field])):
                     # print fields[field][num], fields[field - 1][num]
                     if fields[field][num] != fields[field - 1][num]:
                         for element in draw:
-                            print element[1].getName(), fields[field][num]
                             if element[1].getName() == fields[field][num]:
                                 the_car = copy.copy(element[1])
                                 self.removeCar(element)
                                 draw.remove(element)
                                 draw.append(self.car(the_car, fields[field], self.length))
             self.master.update()
-            time.sleep(delay)        
+            time.sleep(delay)  
+            button.pack_forget()      
 
 
     def _map_coords(self, x, y):
