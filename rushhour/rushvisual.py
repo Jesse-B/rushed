@@ -18,7 +18,7 @@ class RushVisualisation:
 
         # self.master.mainloop()
 
-
+        self.w.delete("all")
     # def vis(self, fields, width, height, vehicles, delay = 0.2):
         # Draw a backing and lines
         x1, y1 = self._map_coords(0, 0)
@@ -52,6 +52,7 @@ class RushVisualisation:
         for vehicle in self.vehicles:
                 # self.car(vehicle, field, length)
             draw.append(self.car(vehicle, fields[0], self.length))
+
         button5 = Button(self.master, text="Start", command=lambda: self.run(fields, draw, button5))
         # button5.grid(row=5, column=0)
         button5.pack()
