@@ -79,7 +79,9 @@ def calculateScore(state, exit, vehicles):
                 score += 2
         tilesToLeft += 1
 
-def runAlgorithmOnField(alg, field, algType):
+def runAlgorithmOnField(alg, fieldFunc, algType):
+    import time
+    field = fieldFunc()
     if algType == "BF":
         stateQueue = collections.deque()
         stateQueue.append(field.tiles)
@@ -91,9 +93,9 @@ def runAlgorithmOnField(alg, field, algType):
     time = time.time() - now
     return {"solution": solution[0], "numStates": solution[1], "time": time}
 
-def warmUpForPuzzel(alg, field, algType):
+def warmUpForPuzzel(alg, fieldFunc, algType):
     for x in range(10):
-        runAlgorithmOnField(alg, field, algType)
+        runAlgorithmOnField(alg, fieldFunc, algType)
 
 if __name__ == "__main__":
     # field = games.field1()
@@ -121,9 +123,9 @@ if __name__ == "__main__":
             queue.append(field.tiles)
             # print "Done warming-up. Took %r seconds" % warmupTime
             now = time.time()
-            # print "Solving puzzle 1:" 
+            # print "Solving puzzle 1:"
             b = BFSearch(field, field.tiles, queue, set([field.tiles]))
-            
+
             # Initialize a drawing surface
             master = Tk()
             w = Canvas(master, width=900, height=500)
@@ -140,7 +142,7 @@ if __name__ == "__main__":
             button.grid(row=1)
             # button.pack()
             # button.place(x=700, y=100)
-            
+
 
             print "Aantal stappen: ", len(b)
 
@@ -149,7 +151,7 @@ if __name__ == "__main__":
             queue.append(field.tiles)
             now = time.time()
             # print "Solving puzzle 2:"
-            
+
             b2 = BFSearch(field, field.tiles, queue, set([field.tiles]))
             button2 = Button(master, text="Visualisatie2", state=NORMAL, command=lambda: RushVisualisation(6, vehicles_2.values(), b2, w, master))
             photo2 = PhotoImage(file = "images/game2.gif")
@@ -159,7 +161,7 @@ if __name__ == "__main__":
 
             # button2.pack()
 
- 
+
             queue.clear()
             field = games.field3()
             queue.append(field.tiles)
@@ -186,7 +188,7 @@ if __name__ == "__main__":
     button4.config(image = photo4, width="120", height="120")
     button4.grid(row=1, column=3)
     # button4.pack()
-    
+
 
     # queue.clear()
     # field5 = games.field5()
