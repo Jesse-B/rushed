@@ -91,6 +91,10 @@ def runAlgorithmOnField(alg, field, algType):
     time = time.time() - now
     return {"solution": solution[0], "numStates": solution[1], "time": time}
 
+def warmUpForPuzzel(alg, field, algType):
+    for x in range(10):
+        runAlgorithmOnField(alg, field, algType)
+
 if __name__ == "__main__":
     # field = games.field1()
     vehicles = vehicles1()
