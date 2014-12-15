@@ -14,7 +14,9 @@ def BFSearch(field, startState, stateQueue, visited):
     solution = None
     exit = field.exit
     numTiles = field.length * field.length
+    numStates = 0
     while solution is None:
+        numStates += 1
         state = stateQueue.popleft()
         if state[exit] == "R":
             solution = backtrace(parent, startState, state)
@@ -27,7 +29,7 @@ def BFSearch(field, startState, stateQueue, visited):
                         parent[move] = state
                         visited.add(move)
                         stateQueue.append(move)
-    return solution
+    return (solution, numStates)
 
 def backtrace(parent, start, end):
     path = [end]
@@ -42,7 +44,9 @@ def AStarSearch(field, startState, stateQueue, visited):
     exit = field.exit
     numTiles = field.length * field.length
     vehicles = field.vehicles
+    numStates = 0
     while solution is None:
+        numStates += 1
         statePrio = stateQueue.get()
         pathLength = statePrio[1]
         state = statePrio[2]
@@ -58,7 +62,7 @@ def AStarSearch(field, startState, stateQueue, visited):
                         visited.add(move)
                         score = calculateScore(move, exit, vehicles)
                         stateQueue.put((score + pathLength, pathLength + 1, move))
-    return solution
+    return (solution, numStates)
 
 def calculateScore(state, exit, vehicles):
     score = 0
@@ -75,7 +79,17 @@ def calculateScore(state, exit, vehicles):
                 score += 2
         tilesToLeft += 1
 
-    
+def runAlgorithmOnField(alg, field, algType):
+    if algType == "BF":
+        stateQueue = collections.deque()
+        stateQueue.append(field.tiles)
+    elif algType == "AStar":
+        stateQueue = Queue.PriorityQueue()
+        stateQueue.put((0, 0, field.tiles))
+    now = time.time()
+    solution = alg(field, field.tiles, stateQueue, set(field.tiles))
+    time = time.time() - now
+    return {"solution": solution[0], "numStates": solution[1], "time": time}
 
 if __name__ == "__main__":
     # field = games.field1()
