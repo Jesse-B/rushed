@@ -16,10 +16,13 @@ class RushVisualisation:
         self.w = canvas
         self.master = the_object
 
-        # self.master.mainloop()
-
         self.w.delete("all")
-    # def vis(self, fields, width, height, vehicles, delay = 0.2):
+
+        self.text = Label(self.master, text="Beginveld")
+        self.text.pack()
+        self.text.place(x=225, y=465)
+        
+
         # Draw a backing and lines
         x1, y1 = self._map_coords(0, 0)
         x2, y2 = self._map_coords(self.width, self.height)
@@ -53,14 +56,21 @@ class RushVisualisation:
                 # self.car(vehicle, field, length)
             draw.append(self.car(vehicle, fields[0], self.length))
 
-        button5 = Button(self.master, text="Start", command=lambda: self.run(fields, draw, button5))
+        button5 = Button(self.master, text="Start", command=lambda: self.run(fields, draw, button5, self.text))
         # button5.grid(row=5, column=0)
         button5.pack()
 
         
 
-    def run(self, fields, draw, button, delay = 0.2):
+    def run(self, fields, draw, button, text, delay = 0.2):
+        steps = 0
         for field in range(len(fields)):
+            steps += 1
+            self.text.destroy()
+            self.text = Label(self.master, text=("Aantal stappen: " + str(steps)))
+            self.text.pack()
+            self.text.place(x=210, y=465)
+
             if field > 0:
                 for num in range(len(fields[field])):
                     # print fields[field][num], fields[field - 1][num]
@@ -71,6 +81,7 @@ class RushVisualisation:
                                 self.removeCar(element)
                                 draw.remove(element)
                                 draw.append(self.car(the_car, fields[field], self.length))
+
             self.master.update()
             time.sleep(delay)  
             button.pack_forget()      
