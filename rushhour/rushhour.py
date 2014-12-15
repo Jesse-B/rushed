@@ -123,30 +123,24 @@ if __name__ == "__main__":
             now = time.time()
             # print "Solving puzzle 1:" 
             b = BFSearch(field, field.tiles, queue, set([field.tiles]))
-
+            
             # Initialize a drawing surface
             master = Tk()
-            w = Canvas(master, width=500, height=500)
+            w = Canvas(master, width=900, height=500)
             w.pack()
             master.update()
+            w.grid(row=0, columnspan=5)
 
-            # self.vis(self.fields, vehicles)
-
-            button = Button(master, text="Visualisatie1", state=NORMAL, command=lambda: RushVisualisation(6, vehicles.values(), b, w, master))
+            button = Button(master, text="Visualisatie1", state=NORMAL, command=lambda: RushVisualisation(6, vehicles.values(), b[0], w, master))
             photo1 = PhotoImage(file = "images\game1.gif")
             button.config(image = photo1, width="120", height="120")
-            button.pack()
+            button.grid(row=1)
+            # button.pack()
             # button.place(x=700, y=100)
-            # button.grid(row=0, column=0)
+            
 
-
-            # RushVisualisation(6, vehicles.values(), b)
             print "Aantal stappen: ", len(b)
-            # print "Time:", time.time() - now, "seconds"
-            # for state in b:
-                # RushVisualisation(6, vehicles.values(), state)
-                # print state
-            # print "Steps:", len(b[0]) - 1
+
             queue.clear()
             field = games.field2()
             queue.append(field.tiles)
@@ -154,40 +148,26 @@ if __name__ == "__main__":
             # print "Solving puzzle 2:"
             
             b2 = BFSearch(field, field.tiles, queue, set([field.tiles]))
-            button2 = Button(master, text="Visualisatie2", state=NORMAL, command=lambda: RushVisualisation(6, vehicles_2.values(), b2, w, master))
+            button2 = Button(master, text="Visualisatie2", state=NORMAL, command=lambda: RushVisualisation(6, vehicles_2.values(), b2[0], w, master))
             photo2 = PhotoImage(file = "images\game2.gif")
             button2.config(image = photo2, width="120", height="120")
-            # button2.grid(row=1, column=0)
+            button2.grid(row=1, column=1)
 
-            button2.pack()
+            # button2.pack()
 
-            # RushVisualisation(6, vehicles.values(), b)
-            # print "Time:", time.time() - now, "seconds"
-            # for state in b:
-                # RushVisualisation(6, vehicles.values(), state)
-                # print Field(state, field.length, field.horizontalCars, field.verticalCars)
-            # print "Steps:", len(b[0]) - 1
+ 
             queue.clear()
             field = games.field3()
             queue.append(field.tiles)
             now = time.time()
             # print "Solving puzzle 1:"
             b3 = BFSearch(field, field.tiles, queue, set([field.tiles]))
-            button3 = Button(master, text="Visualisatie3", state=NORMAL, command=lambda: RushVisualisation(6, vehicles_3.values(), b3, w, master))
+            button3 = Button(master, text="Visualisatie3", state=NORMAL, command=lambda: RushVisualisation(6, vehicles_3.values(), b3[0], w, master))
             photo3 = PhotoImage(file = "images\game3.gif")
             button3.config(image = photo3, width="120", height="120")
-            # button3.grid(row=2, column=0)
-            button3.pack()
+            button3.grid(row=1, column=2)
+            # button3.pack()
 
-    #         print "Time:", time.time() - now, "seconds"
-
-
- 
-    # field = games.field1()
-#     queue.append(field.tiles)
-#     now = time.time()
-#     b = BFSearch(field, field.tiles, queue, set([field.tiles]))
-#     print time.time() - now
 
     # # A*
     queue.clear()
@@ -196,11 +176,11 @@ if __name__ == "__main__":
     priorityQueue.put((0, 0, field4.tiles))
     now = time.time()
     a4 = AStarSearch(field4, field4.tiles, priorityQueue, set([field4.tiles]))
-    button4 = Button(master, text="Visualisatie4", state=NORMAL, command=lambda: RushVisualisation(9, vehicles_4.values(), a4, w, master))
+    button4 = Button(master, text="Visualisatie4", state=NORMAL, command=lambda: RushVisualisation(9, vehicles_4.values(), a4[0], w, master))
     photo4 = PhotoImage(file = "images\game4.gif")
     button4.config(image = photo4, width="120", height="120")
-    # button4.grid(row=3, column=0)
-    button4.pack()
+    button4.grid(row=1, column=3)
+    # button4.pack()
     
 
     # queue.clear()
