@@ -15,9 +15,14 @@ class RushVisualisation:
         self.fields = fields
         self.w = canvas
         self.master = the_object
-
         self.w.delete("all")
+        self.thebegin = self.begin()
+        button5 = Button(self.master, text="Start", command=lambda: self.run(fields, button5))
+        button5.grid(row=0, column=3, sticky=S, pady=5)
+        # button5.pack()
 
+        
+    def begin(self):
         self.text = Label(self.master, text="Beginveld")
         self.text.pack()
         self.text.place(x=225, y=465)
@@ -54,22 +59,23 @@ class RushVisualisation:
         draw = []
         for vehicle in self.vehicles:
                 # self.car(vehicle, field, length)
-            draw.append(self.car(vehicle, fields[0], self.length))
-
-        button5 = Button(self.master, text="Start", command=lambda: self.run(fields, draw, button5, self.text))
-        # button5.grid(row=5, column=0)
-        button5.pack()
+            draw.append(self.car(vehicle, self.fields[0], self.length))
+        return (draw, self.text)
 
         
 
-    def run(self, fields, draw, button, text, delay = 0.2):
+    def run(self, fields, button, delay = 0.2):
         steps = 0
+        self.game = self.begin()
+        draw = self.game[0]
+        text = self.game[1]
+
         for field in range(len(fields)):
             steps += 1
-            self.text.destroy()
-            self.text = Label(self.master, text=("Aantal stappen: " + str(steps)))
-            self.text.pack()
-            self.text.place(x=210, y=465)
+            text.destroy()
+            text = Label(self.master, text=("Aantal stappen: " + str(steps)))
+            text.pack()
+            text.place(x=210, y=465)
 
             if field > 0:
                 for num in range(len(fields[field])):
