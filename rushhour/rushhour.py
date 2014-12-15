@@ -133,7 +133,7 @@ if __name__ == "__main__":
             # self.vis(self.fields, vehicles)
 
             button = Button(master, text="Visualisatie1", state=NORMAL, command=lambda: RushVisualisation(6, vehicles.values(), b, w, master))
-            photo1 = PhotoImage(file = "images\game1.gif")
+            photo1 = PhotoImage(file = "images/game1.gif")
             button.config(image = photo1, width="120", height="120")
             button.pack()
             # button.place(x=700, y=100)
@@ -155,7 +155,7 @@ if __name__ == "__main__":
             
             b2 = BFSearch(field, field.tiles, queue, set([field.tiles]))
             button2 = Button(master, text="Visualisatie2", state=NORMAL, command=lambda: RushVisualisation(6, vehicles_2.values(), b2, w, master))
-            photo2 = PhotoImage(file = "images\game2.gif")
+            photo2 = PhotoImage(file = "images/game2.gif")
             button2.config(image = photo2, width="120", height="120")
             # button2.grid(row=1, column=0)
 
@@ -174,7 +174,7 @@ if __name__ == "__main__":
             # print "Solving puzzle 1:"
             b3 = BFSearch(field, field.tiles, queue, set([field.tiles]))
             button3 = Button(master, text="Visualisatie3", state=NORMAL, command=lambda: RushVisualisation(6, vehicles_3.values(), b3, w, master))
-            photo3 = PhotoImage(file = "images\game3.gif")
+            photo3 = PhotoImage(file = "images/game3.gif")
             button3.config(image = photo3, width="120", height="120")
             # button3.grid(row=2, column=0)
             button3.pack()
@@ -197,7 +197,7 @@ if __name__ == "__main__":
     now = time.time()
     a4 = AStarSearch(field4, field4.tiles, priorityQueue, set([field4.tiles]))
     button4 = Button(master, text="Visualisatie4", state=NORMAL, command=lambda: RushVisualisation(9, vehicles_4.values(), a4, w, master))
-    photo4 = PhotoImage(file = "images\game4.gif")
+    photo4 = PhotoImage(file = "images/game4.gif")
     button4.config(image = photo4, width="120", height="120")
     # button4.grid(row=3, column=0)
     button4.pack()
