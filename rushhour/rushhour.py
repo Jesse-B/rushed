@@ -131,40 +131,9 @@ if __name__ == "__main__":
     button3.config(image = photo3, width="120", height="120")
     button3.grid(row=1, column=2)
 
-
-    # # A*
-    # queue.clear()
-    field4 = games.field4()
-    priorityQueue = Queue.PriorityQueue()
-    priorityQueue.put((0, 0, field4.tiles))
-    now = time.time()
-    a4 = AStarSearch(field4, field4.tiles, priorityQueue, set([field4.tiles]))
-    button4 = Button(master, text="Visualisatie4", state=NORMAL, command=lambda: RushVisualisation(9, vehicles_4.values(), a4, w, master))
+    button4 = Button(master, text="Visualisatie4", state=NORMAL, command=lambda: startUp(AStarSearch, games.field4, "AStar", 9, vehicles_4.values(), w, master))
     photo4 = PhotoImage(file = "images/game4.gif")
     button4.config(image = photo4, width="120", height="120")
     button4.grid(row=1, column=3)
-    # button4.pack()
-
-
-    # queue.clear()
-    # field5 = games.field5()
-    # priorityQueue = Queue.PriorityQueue()
-    # priorityQueue.put((0, 0, field5.tiles))
-    # now = time.time()
-    # a5 = AStarSearch(field5, field5.tiles, priorityQueue, set([field5.tiles]))
-    # button5 = Button(master, text="Visualisatie5", command=lambda: RushVisualisation(9, vehicles_5.values(), a5, w, master))
-    # button5.grid(row=4, column=0)
-    # button5.pack()
-
-
-    # print time.time() - now
-    # for state in a:
-    #     field = Field(state, 6, set(["B", "E", "F", "G", "R"]), set(["A", "C", "D", "H"]), vehicles)
-    # RushVisualisation(9, vehicles.values(), a)
-        # print Field(state, field.length, field.horizontalCars, field.verticalCars)
-    # print "Steps:", len(a) - 1
-
-
-
 
 master.mainloop()
