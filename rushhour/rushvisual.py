@@ -17,8 +17,7 @@ class RushVisualisation:
         self.master = the_object
         self.w.delete("all")
         self.thebegin = self.begin()
-        button5 = Button(self.master, text="Start", command=lambda: self.run(fields, button5))
-        button5.grid(row=0, column=3, sticky=S, pady=5)
+        
         # button5.pack()
 
         
