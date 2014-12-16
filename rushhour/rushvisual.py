@@ -66,7 +66,7 @@ class RushVisualisation:
     def run(self, solution, button, delay = 0.2):
         fields = solution["solution"]
         print solution["time"]
-        steps = 0
+        steps = -1
         draw = self.begin()
         
         text_time = Label(self.master, text=("Found solution in: " + str(solution["time"]) + " sec                 "))
