@@ -164,6 +164,44 @@ def calculateScore57(state, exit, vehicles):
             score += 1
         tilesToRight += 1
 
+def calculateScore6(state, exit, vehicles, fieldLen):
+    return calculateScore61(state, exit, vehicles) + calculateScore62(state, exit, vehicles, fieldLen) + calculateScore63(state, exit, vehicles)
+
+def calculateScore61(state, exit, vehicles):
+    score = 0
+    tilesToLeft = 1
+    while True:
+        score += 1
+        tile = state[exit - tilesToLeft]
+        if tile == "R":
+            return score
+        if tile != "0":
+            score += 1
+        tilesToLeft += 1
+
+def calculateScore62(state, exit, vehicles, fieldLen):
+    score = 0
+    tilesDown = 0
+    while True:
+        tile = state[12 + (tilesDown * fieldLen)]
+        if tile == "L":
+            return score
+        score += 1
+        if tile != "0":
+            score += 1
+        tilesDown += 1
+
+def calculateScore63(state, exit, vehicles):
+    score = 0
+    tilesToLeft = 1
+    while True:
+        score += 1
+        tile = state[24 - tilesToLeft]
+        if tile == "E":
+            return score
+        if tile != "0":
+            score += 1
+        tilesToLeft += 1
 
 def runAlgorithmOnField(alg, fieldFunc, algType, heuristic=None):
     import time
@@ -231,7 +269,7 @@ if __name__ == "__main__":
     button5.config(image = photo5, width="100", height="100")
     button5.grid(row=1, column=4)
 
-    button6 = Button(master, text="Visualisatie6", state=NORMAL, command=lambda: startUp(AStarSearch, games.field6, "AStar", 9, vehicles_6.values(), w, master))
+    button6 = Button(master, text="Visualisatie6", state=NORMAL, command=lambda: startUp(AStarSearch, games.field6, "AStar", 9, vehicles_6.values(), w, master, calculateScore6))
     photo6 = PhotoImage(file = "images/game6.gif")
     button6.config(image = photo6, width="100", height="100")
     button6.grid(row=1, column=5)
