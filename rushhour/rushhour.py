@@ -98,8 +98,9 @@ def warmUpForPuzzel(alg, fieldFunc, algType):
         runAlgorithmOnField(alg, fieldFunc, algType)
 
 def startUp(alg, field, algType, lenght, vehicles, canvas, the_object):
+    print field().getCars()
     warmUpForPuzzel(alg, field, algType)
-    RushVisualisation(lenght, vehicles, canvas, the_object)
+    RushVisualisation(lenght, vehicles, field().getCars(), canvas, the_object)
 
 
 if __name__ == "__main__":

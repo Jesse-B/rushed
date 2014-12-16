@@ -6,13 +6,13 @@ from field import Field
 from Tkinter import *
 
 class RushVisualisation:
-    def __init__(self, length, vehicles, fields, canvas, the_object):
+    def __init__(self, length, vehicles, begin_field, canvas, the_object):
         self.length = length
         self.width = self.length
         self.height = self.length
         self.max_dim = max(self.width + 0.5, self.height)
         self.vehicles = vehicles
-        self.fields = fields
+        self.fields = begin_field
         self.w = canvas
         self.master = the_object
         self.w.delete("all")
@@ -59,7 +59,7 @@ class RushVisualisation:
         draw = []
         for vehicle in self.vehicles:
                 # self.car(vehicle, field, length)
-            draw.append(self.car(vehicle, self.fields[0], self.length))
+            draw.append(self.car(vehicle, self.fields, self.length))
         return (draw, self.text)
 
         
