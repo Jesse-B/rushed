@@ -69,11 +69,11 @@ class RushVisualisation:
         steps = 0
         draw = self.begin()
         
-        text_time = Label(self.master, text=("Found solution in: " + str(solution["time"]) + " sec"))
+        text_time = Label(self.master, text=("Found solution in: " + str(solution["time"]) + " sec                 "))
         text_time.pack()
         text_time.place(x=575, y=140)
 
-        text_states = Label(self.master, text=("Number of states searched: " + str(solution["numStates"])))
+        text_states = Label(self.master, text=("Number of states searched: " + str(solution["numStates"]) + "        "))
         text_states.pack()
         text_states.place(x=585, y=210)
 
@@ -82,7 +82,7 @@ class RushVisualisation:
         for field in range(len(fields)):
             steps += 1
             text.destroy()
-            text = Label(self.master, text=("Number of steps: " + str(steps)))
+            text = Label(self.master, text=("Number of steps: " + str(steps) + "      "))
             text.pack()
             text.place(x=625, y=340)
 
