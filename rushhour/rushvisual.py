@@ -63,7 +63,9 @@ class RushVisualisation:
 
         
 
-    def run(self, fields, button, delay = 0.2):
+    def run(self, solution, button, delay = 0.2):
+        fields = solution["solution"]
+        print solution["time"]
         steps = 0
         self.game = self.begin()
         draw = self.game[0]
