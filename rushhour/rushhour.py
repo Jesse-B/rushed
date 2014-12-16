@@ -97,14 +97,28 @@ def warmUpForPuzzel(alg, fieldFunc, algType):
     for x in range(10):
         runAlgorithmOnField(alg, fieldFunc, algType)
 
+def startUp(alg, field, algType, lenght, vehicles, canvas, the_object):
+    warmUpForPuzzel(alg, field, algType)
+    RushVisualisation(lenght, vehicles, canvas, the_object)
+
+
 if __name__ == "__main__":
-    # field = games.field1()
-    vehicles = vehicles1()
-# #     # RushVisualisation(6, vehicles.values(), field)
-# #
+    vehicles_1 = vehicles1()
     vehicles_2 = vehicles2()
     vehicles_3 = vehicles3()
     vehicles_4 = vehicles4()
+
+    master = Tk()
+    w = Canvas(master, width=900, height=500)
+    w.pack()
+    master.update()
+    w.grid(row=0, columnspan=5)
+
+    button = Button(master, text="Visualisatie1", state=NORMAL, command=lambda: startUp(BFSearch, games.field1, "BF", 6, vehicles_1.values(), w, master))
+    photo1 = PhotoImage(file = "images/game1.gif")
+    button.config(image = photo1, width="120", height="120")
+    button.grid(row=1)
+
     # Breadth First
     queue = collections.deque()
     # queue.append(field.tiles)
@@ -127,19 +141,11 @@ if __name__ == "__main__":
             b = BFSearch(field, field.tiles, queue, set([field.tiles]))
 
             # Initialize a drawing surface
-            master = Tk()
-            w = Canvas(master, width=900, height=500)
-            w.pack()
-            master.update()
-            w.grid(row=0, columnspan=5)
+            
 
             # self.vis(self.fields, vehicles)
 
-            button = Button(master, text="Visualisatie1", state=NORMAL, command=lambda: RushVisualisation(6, vehicles.values(), b, w, master))
-            photo1 = PhotoImage(file = "images/game1.gif")
-
-            button.config(image = photo1, width="120", height="120")
-            button.grid(row=1)
+            
             # button.pack()
             # button.place(x=700, y=100)
 
@@ -160,7 +166,6 @@ if __name__ == "__main__":
             button2.grid(row=1, column=1)
 
             # button2.pack()
-
 
             queue.clear()
             field = games.field3()
