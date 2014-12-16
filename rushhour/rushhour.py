@@ -6,7 +6,7 @@ import Queue
 from Tkinter import *
 from timeit import Timer
 from field import Field
-from rushvisual import RushVisualisation, Vehicle, vehicles1, vehicles2, vehicles3, vehicles4
+from rushvisual import RushVisualisation, Vehicle, vehicles1, vehicles2, vehicles3, vehicles4, vehicles5, vehicles6, vehicles7
 
 
 def BFSearch(field, startState, stateQueue, visited):
@@ -102,7 +102,7 @@ def startUp(alg, field, algType, lenght, vehicles, canvas, the_object):
     if algType == "BF":
         warmUpForPuzzel(alg, field, algType)
     button5 = Button(the_object, text="Start algorithm", command=lambda: theVis.run(runAlgorithmOnField(alg, field, algType), button5))
-    button5.grid(row=0, column=3, sticky=S, pady=15)
+    button5.grid(row=0, column=3, columnspan=5, sticky=S, pady=55)
 
 
 if __name__ == "__main__":
@@ -110,31 +110,49 @@ if __name__ == "__main__":
     vehicles_2 = vehicles2()
     vehicles_3 = vehicles3()
     vehicles_4 = vehicles4()
+    vehicles_5 = vehicles5()
+    vehicles_6 = vehicles6()
+    vehicles_7 = vehicles7()
 
     master = Tk()
-    w = Canvas(master, width=900, height=500)
+    w = Canvas(master, width=650, height=500)
     w.pack()
     master.update()
     w.grid(row=0, columnspan=5)
 
     button = Button(master, text="Visualisatie1", state=NORMAL, command=lambda: startUp(BFSearch, games.field1, "BF", 6, vehicles_1.values(), w, master))
     photo1 = PhotoImage(file = "images/game1.gif")
-    button.config(image = photo1, width="120", height="120")
+    button.config(image = photo1, width="100", height="100")
     button.grid(row=1)
 
     button2 = Button(master, text="Visualisatie2", state=NORMAL, command=lambda: startUp(BFSearch, games.field2, "BF", 6, vehicles_2.values(), w, master))
     photo2 = PhotoImage(file = "images/game2.gif")
-    button2.config(image = photo2, width="120", height="120")
+    button2.config(image = photo2, width="100", height="100")
     button2.grid(row=1, column=1)
 
     button3 = Button(master, text="Visualisatie3", state=NORMAL, command=lambda: startUp(BFSearch, games.field3, "BF", 6, vehicles_3.values(), w, master))
     photo3 = PhotoImage(file = "images/game3.gif")
-    button3.config(image = photo3, width="120", height="120")
+    button3.config(image = photo3, width="100", height="100")
     button3.grid(row=1, column=2)
 
     button4 = Button(master, text="Visualisatie4", state=NORMAL, command=lambda: startUp(AStarSearch, games.field4, "AStar", 9, vehicles_4.values(), w, master))
     photo4 = PhotoImage(file = "images/game4.gif")
-    button4.config(image = photo4, width="120", height="120")
+    button4.config(image = photo4, width="100", height="100")
     button4.grid(row=1, column=3)
+
+    button5 = Button(master, text="Visualisatie5", state=NORMAL, command=lambda: startUp(AStarSearch, games.field5, "AStar", 9, vehicles_5.values(), w, master))
+    photo5 = PhotoImage(file = "images/game5.gif")
+    button5.config(image = photo5, width="100", height="100")
+    button5.grid(row=1, column=4)
+
+    button6 = Button(master, text="Visualisatie6", state=NORMAL, command=lambda: startUp(AStarSearch, games.field6, "AStar", 9, vehicles_6.values(), w, master))
+    photo6 = PhotoImage(file = "images/game6.gif")
+    button6.config(image = photo6, width="100", height="100")
+    button6.grid(row=1, column=5)
+
+    button7 = Button(master, text="Visualisatie7", state=NORMAL, command=lambda: startUp(AStarSearch, games.field7, "AStar", 12, vehicles_7.values(), w, master))
+    photo7 = PhotoImage(file = "images/game7.gif")
+    button7.config(image = photo7, width="100", height="100")
+    button7.grid(row=1, column=6, padx=40)
 
 master.mainloop()

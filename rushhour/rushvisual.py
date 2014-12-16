@@ -22,11 +22,6 @@ class RushVisualisation:
 
         
     def begin(self):
-        self.text = Label(self.master, text="Beginveld")
-        self.text.pack()
-        self.text.place(x=225, y=465)
-        
-
         # Draw a backing and lines
         x1, y1 = self._map_coords(0, 0)
         x2, y2 = self._map_coords(self.width, self.height)
@@ -51,15 +46,21 @@ class RushVisualisation:
             x2, y2 = self._map_coords(self.width, i)
             self.w.create_line(x1, y1, x2, y2)
 
-        endx1, endy1 = self._map_coords(6, 2)
-        endx2, endy2 = self._map_coords(6.3, 3)
+        if self.length == 6:
+            endx1, endy1 = self._map_coords(6, 2)
+            endx2, endy2 = self._map_coords(6.3, 3)
+        elif self.length == 9:
+            endx1, endy1 = self._map_coords(9, 4)
+            endx2, endy2 = self._map_coords(9.3, 5)
+        else:
+            endx1, endy1 = self._map_coords(12, 5)
+            endx2, endy2 = self._map_coords(12.3, 6)
         self.w.create_rectangle(endx1, endy1, endx2, endy2, fill = "gray")
-        # print "Visualisatie"
+
         draw = []
         for vehicle in self.vehicles:
-                # self.car(vehicle, field, length)
             draw.append(self.car(vehicle, self.fields, self.length))
-        return (draw, self.text)
+        return draw
 
         
 
@@ -67,16 +68,24 @@ class RushVisualisation:
         fields = solution["solution"]
         print solution["time"]
         steps = 0
-        self.game = self.begin()
-        draw = self.game[0]
-        text = self.game[1]
+        draw = self.begin()
+        
+        text_time = Label(self.master, text=("Found solution in: " + str(solution["time"]) + " sec"))
+        text_time.pack()
+        text_time.place(x=575, y=140)
+
+        text_states = Label(self.master, text=("Number of states searched: " + str(solution["numStates"])))
+        text_states.pack()
+        text_states.place(x=585, y=210)
+
+        text = Label(self.master, text=("Aantal stappen: 0"))
 
         for field in range(len(fields)):
             steps += 1
             text.destroy()
             text = Label(self.master, text=("Aantal stappen: " + str(steps)))
             text.pack()
-            text.place(x=210, y=465)
+            text.place(x=615, y=340)
 
             if field > 0:
                 for num in range(len(fields[field])):
@@ -217,7 +226,7 @@ def vehicles4():
         "G": Vehicle("G", "vertical", "yellow"), 
         "H": Vehicle("H", "horizontal", "orange"),
         "I": Vehicle("I", "vertical", "blue"),
-        "J": Vehicle("J", "horizontal", "grey"),
+        "J": Vehicle("J", "horizontal", "black"),
         "K": Vehicle("K", "vertical", "blue"),
         "L": Vehicle("L", "horizontal", "green"),
         "M": Vehicle("M", "vertical", "orange"),
@@ -227,7 +236,7 @@ def vehicles4():
         "Q": Vehicle("Q", "horizontal", "purple"),
         "S": Vehicle("S", "horizontal", "pink"), 
         "T": Vehicle("T", "vertical", "yellow"),
-        "U": Vehicle("U", "vertical", "grey"), 
+        "U": Vehicle("U", "vertical", "black"), 
         "V": Vehicle("V", "horizontal", "purple"),
         "R": Vehicle("R", "horizontal", "red")
     }
@@ -245,7 +254,7 @@ def vehicles5():
         "I": Vehicle("I", "horizontal", "cyan"),
         "J": Vehicle("J", "vertical", "orange"),
         "K": Vehicle("K", "horizontal", "green"),
-        "L": Vehicle("L", "horizontal", "grey"),
+        "L": Vehicle("L", "horizontal", "black"),
         "M": Vehicle("M", "vertical", "cyan"),
         "N": Vehicle("N", "vertical", "purple"),
         "O": Vehicle("O", "horizontal", "green"), 
@@ -260,3 +269,80 @@ def vehicles5():
         "R": Vehicle("R", "horizontal", "red")
     }
     
+def vehicles6():
+    return {
+        "A": Vehicle("A", "horizontal", "blue"),
+        "B": Vehicle("B", "horizontal", "cyan"),
+        "C": Vehicle("C", "vertical", "cyan"),
+        "D": Vehicle("D", "horizontal", "yellow"), 
+        "E": Vehicle("E", "horizontal", "green"), 
+        "F": Vehicle("F", "vertical", "purple"),
+        "G": Vehicle("G", "vertical", "orange"), 
+        "H": Vehicle("H", "horizontal", "yellow"),
+        "I": Vehicle("I", "horizontal", "blue"),
+        "J": Vehicle("J", "horizontal", "green"),
+        "K": Vehicle("K", "vertical", "blue"),
+        "L": Vehicle("L", "vertical", "yellow"),
+        "M": Vehicle("M", "vertical", "green"),
+        "N": Vehicle("N", "vertical", "orange"),
+        "O": Vehicle("O", "horizontal", "orange"), 
+        "P": Vehicle("P", "vertical", "orange"),
+        "Q": Vehicle("Q", "horizontal", "cyan"),
+        "S": Vehicle("S", "vertical", "black"), 
+        "T": Vehicle("T", "horizontal", "green"),
+        "U": Vehicle("U", "horizontal", "yellow"), 
+        "V": Vehicle("V", "horizontal", "orange"),
+        "W": Vehicle("W", "vertical", "purple"),
+        "X": Vehicle("X", "horizontal", "black"),
+        "Y": Vehicle("Y", "horizontal", "green"),
+        "Z": Vehicle("Z", "vertical", "blue"), 
+        "R": Vehicle("R", "horizontal", "red")
+    }
+
+def vehicles7():
+    return{
+        "A": Vehicle("A", "vertical", "green"),
+        "B": Vehicle("B", "horizontal", "yellow"),
+        "C": Vehicle("C", "horizontal", "orange"),
+        "D": Vehicle("D", "vertical", "purple"), 
+        "E": Vehicle("E", "vertical", "pink"), 
+        "F": Vehicle("F", "horizontal", "black"),
+        "G": Vehicle("G", "horizontal", "black"), 
+        "H": Vehicle("H", "horizontal", "yellow"),
+        "I": Vehicle("I", "horizontal", "orange"),
+        "J": Vehicle("J", "vertical", "green"),
+        "K": Vehicle("K", "horizontal", "green"),
+        "L": Vehicle("L", "horizontal", "yellow"),
+        "M": Vehicle("M", "horizontal", "yellow"),
+        "N": Vehicle("N", "horizontal", "purple"),
+        "O": Vehicle("O", "vertical", "cyan"), 
+        "P": Vehicle("P", "horizontal", "green"),
+        "Q": Vehicle("Q", "vertical", "orange"),
+        "S": Vehicle("S", "vertical", "green"), 
+        "T": Vehicle("T", "vertical", "cyan"),
+        "U": Vehicle("U", "horizontal", "purple"), 
+        "V": Vehicle("V", "horizontal", "cyan"),
+        "W": Vehicle("W", "horizontal", "green"),
+        "X": Vehicle("X", "vertical", "blue"),
+        "Y": Vehicle("Y", "vertical", "yellow"),
+        "Z": Vehicle("Z", "vertical", "cyan"), 
+        "1": Vehicle("1", "vertical", "yellow"),
+        "2": Vehicle("2", "vertical", "black"),
+        "3": Vehicle("3", "horizontal", "blue"),
+        "4": Vehicle("4", "vertical", "cyan"), 
+        "5": Vehicle("5", "horizontal", "green"), 
+        "6": Vehicle("6", "horizontal", "yellow"),
+        "7": Vehicle("7", "vertical", "blue"), 
+        "8": Vehicle("8", "vertical", "cyan"),
+        "9": Vehicle("9", "horizontal", "green"),
+        "!": Vehicle("!", "horizontal", "blue"),
+        "@": Vehicle("@", "vertical", "purple"),
+        "#": Vehicle("#", "vertical", "cyan"),
+        "$": Vehicle("$", "vertical", "green"),
+        "%": Vehicle("%", "horizontal", "purple"),
+        "^": Vehicle("^", "horizontal", "orange"), 
+        "&": Vehicle("&", "horizontal", "cyan"),
+        "(": Vehicle("(", "vertical", "orange"), 
+        "-": Vehicle("-", "vertical", "blue"), 
+        "R": Vehicle("R", "horizontal", "red")
+    }
