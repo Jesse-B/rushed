@@ -42,7 +42,8 @@ def AStarSearch(field, startState, stateQueue, visited):
     parent = {}
     solution = None
     exit = field.exit
-    numTiles = field.length * field.length
+    fieldLen = field.length
+    numTiles = fieldLen * fieldLen
     vehicles = field.vehicles
     numStates = 0
     while solution is None:
@@ -60,11 +61,11 @@ def AStarSearch(field, startState, stateQueue, visited):
                     if not move in visited:
                         parent[move] = state
                         visited.add(move)
-                        score = calculateScore(move, exit, vehicles)
+                        score = calculateScore5(move, exit, vehicles, fieldLen)
                         stateQueue.put((score + pathLength + 1, pathLength + 1, move))
     return (solution, numStates)
 
-def calculateScore(state, exit, vehicles):
+def calculateScore4(state, exit, vehicles):
     score = 0
     tilesToLeft = 1
     while True:
@@ -75,6 +76,9 @@ def calculateScore(state, exit, vehicles):
         if tile != "0":
             score += 1
         tilesToLeft += 1
+
+def calculateScore5(state, exit, vehicles, fieldLen):
+    return calculateScore51(state, exit, vehicles, fieldLen) + calculateScore52(state, exit, vehicles) + calculateScore53(state, exit, vehicles) + calculateScore54(state, exit, vehicles, fieldLen) + calculateScore55(state, exit, vehicles, fieldLen) + calculateScore56(state, exit, vehicles) + calculateScore57(state, exit, vehicles)
 
 def calculateScore51(state, exit, vehicles, fieldLen):
     score = 0
@@ -87,6 +91,79 @@ def calculateScore51(state, exit, vehicles, fieldLen):
         if tile != "0":
             score += 1
         tilesDown += 1
+
+def calculateScore52(state, exit, vehicles):
+    score = 0
+    tilesToRight = 0
+    while True:
+        tile = state[63 + tilesToRight]
+        if tile == "H":
+            return score
+        score += 1
+        if tile != "0":
+            score += 1
+        tilesToRight += 1
+
+def calculateScore53(state, exit, vehicles):
+    score = 0
+    tilesToRight = 0
+    while True:
+        tile = state[65 + tilesToRight]
+        if tile == "L":
+            return score
+        score += 1
+        if tile != "0":
+            score += 1
+        tilesToRight += 1
+
+def calculateScore54(state, exit, vehicles, fieldLen):
+    score = 0
+    tilesUp = 0
+    while True:
+        tile = state[60 - (tilesUp * fieldLen)]
+        if tile == "S":
+            return score
+        score += 1
+        if tile != "0":
+            score += 1
+        tilesUp += 1
+
+def calculateScore55(state, exit, vehicles, fieldLen):
+    score = 0
+    tilesUp = 0
+    while True:
+        tile = state[33 - (tilesUp * fieldLen)]
+        if tile == "W":
+            return score
+        score += 1
+        if tile != "0":
+            score += 1
+        tilesUp += 1
+
+def calculateScore56(state, exit, vehicles):
+    score = 0
+    tilesToRight = 0
+    while True:
+        tile = state[15 + tilesToRight]
+        if tile == "X":
+            return score
+        score += 1
+        if tile != "0":
+            score += 1
+        tilesToRight += 1
+
+def calculateScore57(state, exit, vehicles):
+    score = 0
+    tilesToRight = 0
+    while True:
+        tile = state[31 + tilesToRight]
+        if tile == "T":
+            return score
+        score += 1
+        if tile != "0":
+            score += 1
+        tilesToRight += 1
+
 
 def runAlgorithmOnField(alg, fieldFunc, algType):
     import time
@@ -103,7 +180,7 @@ def runAlgorithmOnField(alg, fieldFunc, algType):
     return {"solution": solution[0], "numStates": solution[1], "time": time}
 
 def warmUpForPuzzel(alg, fieldFunc, algType):
-    for x in range(10):
+    for x in range(2):
         runAlgorithmOnField(alg, fieldFunc, algType)
 
 def startUp(alg, field, algType, lenght, vehicles, canvas, the_object):
