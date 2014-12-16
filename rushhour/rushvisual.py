@@ -59,8 +59,17 @@ class RushVisualisation:
 
         draw = []
         for vehicle in self.vehicles:
+<<<<<<< Updated upstream
             draw.append(self.car(vehicle, self.fields, self.length))
         return draw
+=======
+<<<<<<< Updated upstream
+=======
+            #print vehicle
+>>>>>>> Stashed changes
+                # self.car(vehicle, field, length)
+            draw.append(self.car(vehicle, fields[0], self.length))
+>>>>>>> Stashed changes
 
         
 
