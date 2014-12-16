@@ -99,7 +99,8 @@ def warmUpForPuzzel(alg, fieldFunc, algType):
 
 def startUp(alg, field, algType, lenght, vehicles, canvas, the_object):
     theVis = RushVisualisation(lenght, vehicles, field().getCars(), canvas, the_object)
-    warmUpForPuzzel(alg, field, algType)
+    if algType == "BF":
+        warmUpForPuzzel(alg, field, algType)
     button5 = Button(the_object, text="Start algoritm", command=lambda: theVis.run(runAlgorithmOnField(alg, field, algType), button5))
     button5.grid(row=0, column=3, sticky=S, pady=15)
 
