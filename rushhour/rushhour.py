@@ -121,70 +121,19 @@ if __name__ == "__main__":
     button.config(image = photo1, width="120", height="120")
     button.grid(row=1)
 
-    # Breadth First
-    queue = collections.deque()
-    # queue.append(field.tiles)
-    # print "Warming-up Breadth First algorithm for PyPy..."
-    warmupTime = 0
-    for x in range(10):
-        queue.clear()
-        field = games.field1()
-        queue.append(field.tiles)
-        now = time.time()
-        BFSearch(field, field.tiles, queue, set([field.tiles]))
-        warmupTime += time.time() - now
-        if x == 9:
-            queue.clear()
-            field = games.field1()
-            queue.append(field.tiles)
-            # print "Done warming-up. Took %r seconds" % warmupTime
-            now = time.time()
-            # print "Solving puzzle 1:"
-            b = BFSearch(field, field.tiles, queue, set([field.tiles]))
+    button2 = Button(master, text="Visualisatie2", state=NORMAL, command=lambda: startUp(BFSearch, games.field2, "BF", 6, vehicles_2.values(), w, master))
+    photo2 = PhotoImage(file = "images/game2.gif")
+    button2.config(image = photo2, width="120", height="120")
+    button2.grid(row=1, column=1)
 
-            # Initialize a drawing surface
-            
-
-            # self.vis(self.fields, vehicles)
-
-            
-            # button.pack()
-            # button.place(x=700, y=100)
-
-
-            print "Aantal stappen: ", len(b)
-
-            queue.clear()
-            field = games.field2()
-            queue.append(field.tiles)
-            now = time.time()
-            # print "Solving puzzle 2:"
-
-            b2 = BFSearch(field, field.tiles, queue, set([field.tiles]))
-            button2 = Button(master, text="Visualisatie2", state=NORMAL, command=lambda: RushVisualisation(6, vehicles_2.values(), b2, w, master))
-            photo2 = PhotoImage(file = "images/game2.gif")
-
-            button2.config(image = photo2, width="120", height="120")
-            button2.grid(row=1, column=1)
-
-            # button2.pack()
-
-            queue.clear()
-            field = games.field3()
-            queue.append(field.tiles)
-            now = time.time()
-            # print "Solving puzzle 1:"
-            b3 = BFSearch(field, field.tiles, queue, set([field.tiles]))
-            button3 = Button(master, text="Visualisatie3", state=NORMAL, command=lambda: RushVisualisation(6, vehicles_3.values(), b3, w, master))
-            photo3 = PhotoImage(file = "images/game3.gif")
-
-            button3.config(image = photo3, width="120", height="120")
-            button3.grid(row=1, column=2)
-            # button3.pack()
+    button3 = Button(master, text="Visualisatie3", state=NORMAL, command=lambda: startUp(BFSearch, games.field3, "BF", 6, vehicles_3.values(), w, master))
+    photo3 = PhotoImage(file = "images/game3.gif")
+    button3.config(image = photo3, width="120", height="120")
+    button3.grid(row=1, column=2)
 
 
     # # A*
-    queue.clear()
+    # queue.clear()
     field4 = games.field4()
     priorityQueue = Queue.PriorityQueue()
     priorityQueue.put((0, 0, field4.tiles))
