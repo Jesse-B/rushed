@@ -94,7 +94,7 @@ class RushVisualisation:
             text.destroy()
             text = Label(self.master, text=("Number of steps: " + str(steps)))
             text.pack()
-            text.place(x=619, y=340)
+            text.place(x=625, y=340)
 
             if field > 0:
                 for num in range(len(fields[field])):
