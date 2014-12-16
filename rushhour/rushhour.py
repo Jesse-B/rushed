@@ -68,17 +68,25 @@ def calculateScore(state, exit, vehicles):
     score = 0
     tilesToLeft = 1
     while True:
-        score += 2
+        score += 1
         tile = state[exit - tilesToLeft]
         if tile == "R":
             return score
         if tile != "0":
-            if vehicles[tile] == 2:
-                score += 1
-            else:
-                score += 2
+            score += 1
         tilesToLeft += 1
 
+def calculateScore51(state, exit, vehicles, fieldLen):
+    score = 0
+    tilesDown = 0
+    while True:
+        tile = state[17 + (tilesDown * fieldLen)]
+        if tile == "P":
+            return score
+        score += 1
+        if tile != "0":
+            score += 1
+        tilesDown += 1
 
 def runAlgorithmOnField(alg, fieldFunc, algType):
     import time
