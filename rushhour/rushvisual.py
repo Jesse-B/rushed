@@ -65,7 +65,6 @@ class RushVisualisation:
 
     def run(self, solution, button, delay = 0.2):
         fields = solution["solution"]
-        print solution["time"]
         steps = -1
         draw = self.begin()
         

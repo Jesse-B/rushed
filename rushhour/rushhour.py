@@ -9,7 +9,7 @@ from field import Field
 from rushvisual import RushVisualisation, Vehicle, vehicles1, vehicles2, vehicles3, vehicles4, vehicles5, vehicles6, vehicles7
 
 
-def BFSearch(field, startState, stateQueue, visited):
+def BFSearch(field, startState, stateQueue, visited, heuristic=None):
     parent = {}
     solution = None
     exit = field.exit
@@ -38,7 +38,7 @@ def backtrace(parent, start, end):
     path.reverse()
     return path
 
-def AStarSearch(field, startState, stateQueue, visited):
+def AStarSearch(field, startState, stateQueue, visited, heuristic=None):
     parent = {}
     solution = None
     exit = field.exit
@@ -61,11 +61,11 @@ def AStarSearch(field, startState, stateQueue, visited):
                     if not move in visited:
                         parent[move] = state
                         visited.add(move)
-                        score = calculateScore5(move, exit, vehicles, fieldLen)
+                        score = heuristic(move, exit, vehicles, fieldLen)
                         stateQueue.put((score + pathLength + 1, pathLength + 1, move))
     return (solution, numStates)
 
-def calculateScore4(state, exit, vehicles):
+def calculateScore4(state, exit, vehicles, fieldLen):
     score = 0
     tilesToLeft = 1
     while True:
@@ -165,7 +165,7 @@ def calculateScore57(state, exit, vehicles):
         tilesToRight += 1
 
 
-def runAlgorithmOnField(alg, fieldFunc, algType):
+def runAlgorithmOnField(alg, fieldFunc, algType, heuristic=None):
     import time
     field = fieldFunc()
     if algType == "BF":
@@ -175,7 +175,7 @@ def runAlgorithmOnField(alg, fieldFunc, algType):
         stateQueue = Queue.PriorityQueue()
         stateQueue.put((0, 0, field.tiles))
     now = time.time()
-    solution = alg(field, field.tiles, stateQueue, set(field.tiles))
+    solution = alg(field, field.tiles, stateQueue, set(field.tiles), heuristic)
     time = time.time() - now
     return {"solution": solution[0], "numStates": solution[1], "time": time}
 
@@ -183,11 +183,11 @@ def warmUpForPuzzel(alg, fieldFunc, algType):
     for x in range(2):
         runAlgorithmOnField(alg, fieldFunc, algType)
 
-def startUp(alg, field, algType, lenght, vehicles, canvas, the_object):
+def startUp(alg, field, algType, lenght, vehicles, canvas, the_object, heuristic=None):
     theVis = RushVisualisation(lenght, vehicles, field().getCars(), canvas, the_object)
     if algType == "BF":
         warmUpForPuzzel(alg, field, algType)
-    button5 = Button(the_object, text="Start algorithm", command=lambda: theVis.run(runAlgorithmOnField(alg, field, algType), button5))
+    button5 = Button(the_object, text="Start algorithm", command=lambda: theVis.run(runAlgorithmOnField(alg, field, algType, heuristic), button5))
     button5.grid(row=0, column=3, columnspan=5, sticky=S, pady=55)
 
 
@@ -221,12 +221,12 @@ if __name__ == "__main__":
     button3.config(image = photo3, width="100", height="100")
     button3.grid(row=1, column=2)
 
-    button4 = Button(master, text="Visualisatie4", state=NORMAL, command=lambda: startUp(AStarSearch, games.field4, "AStar", 9, vehicles_4.values(), w, master))
+    button4 = Button(master, text="Visualisatie4", state=NORMAL, command=lambda: startUp(AStarSearch, games.field4, "AStar", 9, vehicles_4.values(), w, master, calculateScore4))
     photo4 = PhotoImage(file = "images/game4.gif")
     button4.config(image = photo4, width="100", height="100")
     button4.grid(row=1, column=3)
 
-    button5 = Button(master, text="Visualisatie5", state=NORMAL, command=lambda: startUp(AStarSearch, games.field5, "AStar", 9, vehicles_5.values(), w, master))
+    button5 = Button(master, text="Visualisatie5", state=NORMAL, command=lambda: startUp(AStarSearch, games.field5, "AStar", 9, vehicles_5.values(), w, master, calculateScore5))
     photo5 = PhotoImage(file = "images/game5.gif")
     button5.config(image = photo5, width="100", height="100")
     button5.grid(row=1, column=4)
