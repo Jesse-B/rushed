@@ -79,7 +79,7 @@ def calculateScore(state, exit, vehicles):
                 score += 2
         tilesToLeft += 1
 
-<<<<<<< Updated upstream
+
 def runAlgorithmOnField(alg, fieldFunc, algType):
     import time
     field = fieldFunc()
@@ -89,101 +89,6 @@ def runAlgorithmOnField(alg, fieldFunc, algType):
     elif algType == "AStar":
         stateQueue = Queue.PriorityQueue()
         stateQueue.put((0, 0, field.tiles))
-=======
-    
-
-if __name__ == "__main__":
-    # field = games.field1()
-    vehicles = vehicles1()
-# #     # RushVisualisation(6, vehicles.values(), field)
-# #
-    vehicles_2 = vehicles2()
-    vehicles_3 = vehicles3()
-    vehicles_4 = vehicles4()
-    # Breadth First
-    queue = collections.deque()
-    # queue.append(field.tiles)
-    # print "Warming-up Breadth First algorithm for PyPy..."
-    warmupTime = 0
-    for x in range(10):
-        queue.clear()
-        field = games.field1()
-        queue.append(field.tiles)
-        now = time.time()
-        BFSearch(field, field.tiles, queue, set([field.tiles]))
-        warmupTime += time.time() - now
-        if x == 9:
-            queue.clear()
-            field = games.field1()
-            queue.append(field.tiles)
-            # print "Done warming-up. Took %r seconds" % warmupTime
-            now = time.time()
-            # print "Solving puzzle 1:" 
-            b = BFSearch(field, field.tiles, queue, set([field.tiles]))
-
-            # Initialize a drawing surface
-            master = Tk()
-            w = Canvas(master, width=500, height=500)
-            w.pack()
-            master.update()
-
-            # self.vis(self.fields, vehicles)
-
-            button = Button(master, text="Visualisatie1", state=NORMAL, command=lambda: RushVisualisation(6, vehicles.values(), b, w, master))
-            button.grid(row=0, column=0)
-            button.pack()
-
-
-            # RushVisualisation(6, vehicles.values(), b)
-            print "Aantal stappen: ", len(b)
-            # print "Time:", time.time() - now, "seconds"
-            # for state in b:
-                # RushVisualisation(6, vehicles.values(), state)
-                # print state
-            # print "Steps:", len(b[0]) - 1
-            queue.clear()
-            field = games.field2()
-            queue.append(field.tiles)
-            now = time.time()
-            # print "Solving puzzle 2:"
-            
-            b2 = BFSearch(field, field.tiles, queue, set([field.tiles]))
-            button2 = Button(master, text="Visualisatie2", state=NORMAL, command=lambda: RushVisualisation(6, vehicles_2.values(), b2, w, master))
-            button2.grid(row=1, column=0)
-            button2.pack()
-
-            # RushVisualisation(6, vehicles.values(), b)
-            # print "Time:", time.time() - now, "seconds"
-            # for state in b:
-                # RushVisualisation(6, vehicles.values(), state)
-                # print Field(state, field.length, field.horizontalCars, field.verticalCars)
-            # print "Steps:", len(b[0]) - 1
-            queue.clear()
-            field = games.field4()
-            queue.append(field.tiles)
-            now = time.time()
-            # print "Solving puzzle 1:"
-            b3 = BFSearch(field, field.tiles, queue, set([field.tiles]))
-            button3 = Button(master, text="Visualisatie3", state=NORMAL, command=lambda: RushVisualisation(6, vehicles_3.values(), b3, w, master))
-            button3.grid(row=2, column=0)
-            button3.pack()
-
-            print "Time:", time.time() - now, "seconds"
-
-
- 
-    # field = games.field1()
-#     queue.append(field.tiles)
-#     now = time.time()
-#     b = BFSearch(field, field.tiles, queue, set([field.tiles]))
-#     print time.time() - now
-
-    # # A*
-    queue.clear()
-    field4 = games.field4()
-    priorityQueue = Queue.PriorityQueue()
-    priorityQueue.put((0, 0, field4.tiles))
->>>>>>> Stashed changes
     now = time.time()
     solution = alg(field, field.tiles, stateQueue, set(field.tiles))
     time = time.time() - now
