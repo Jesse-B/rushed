@@ -61,7 +61,7 @@ def AStarSearch(field, startState, stateQueue, visited):
                         parent[move] = state
                         visited.add(move)
                         score = calculateScore(move, exit, vehicles)
-                        stateQueue.put((score + pathLength, pathLength + 1, move))
+                        stateQueue.put((score + pathLength + 1, pathLength + 1, move))
     return (solution, numStates)
 
 def calculateScore(state, exit, vehicles):
@@ -101,7 +101,7 @@ def startUp(alg, field, algType, lenght, vehicles, canvas, the_object):
     theVis = RushVisualisation(lenght, vehicles, field().getCars(), canvas, the_object)
     if algType == "BF":
         warmUpForPuzzel(alg, field, algType)
-    button5 = Button(the_object, text="Start algoritm", command=lambda: theVis.run(runAlgorithmOnField(alg, field, algType), button5))
+    button5 = Button(the_object, text="Start algorithm", command=lambda: theVis.run(runAlgorithmOnField(alg, field, algType), button5))
     button5.grid(row=0, column=3, sticky=S, pady=15)
 
 
