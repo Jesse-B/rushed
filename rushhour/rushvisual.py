@@ -78,14 +78,14 @@ class RushVisualisation:
         text_states.pack()
         text_states.place(x=585, y=210)
 
-        text = Label(self.master, text=("Aantal stappen: 0"))
+        text = Label(self.master, text=("Number of steps: 0"))
 
         for field in range(len(fields)):
             steps += 1
             text.destroy()
-            text = Label(self.master, text=("Aantal stappen: " + str(steps)))
+            text = Label(self.master, text=("Number of steps: " + str(steps)))
             text.pack()
-            text.place(x=615, y=340)
+            text.place(x=625, y=340)
 
             if field > 0:
                 for num in range(len(fields[field])):
